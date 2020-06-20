@@ -146,7 +146,7 @@ function overBasura(img,id_name,label_name){
     over_mp3.play()
     var basura_cont = getI(id_name)
     var marco = basura_cont.getElementsByClassName('basura_cont_marco')[0]
-    marco.style.visibility = 'visible'
+    marco.style.opacity = 1
 
     var label = getI('basura_label')
     label.innerHTML = label_name
@@ -168,7 +168,7 @@ function overBasura(img,id_name,label_name){
 function outBasura(id_name,label_name){
     var basura_cont = getI(id_name)
     var marco = basura_cont.getElementsByClassName('basura_cont_marco')[0]
-    marco.style.visibility = 'hidden'
+    marco.style.opacity = 0
 
     var label = getI('basura_label')
     label.className = 'basura_label_off'
@@ -293,14 +293,15 @@ function upBasura(event){
         var cat = residuo_actual.categoria
         if(cat==caneca_activa_ind){
             //bien
-            depositar_mp3.play()
+            var div_click_action = basura_clicked.getElementsByClassName('basura_cont_imagen')[0]
+            var img_click_action = div_click_action.getElementsByTagName('div')[0]
+            img_click_action.setAttribute('onmousedown','')
+
+            correcto_mp3.play()
             caneca_activa.className = 'caneca_deposita'
             setInstructivo({msg:'Correcto!!<br />Continúa asi'})
         }else{
             basura_clicked.classList.remove('basura_cont_selected')
-            var div_click_action = basura_clicked.getElementsByClassName('basura_cont_imagen')[0]
-            var img_click_action = div_click_action.getElementsByTagName('div')[0]
-            img_click_action.setAttribute('onmousedown','')
             
             var estrella_mala = getI('estrellas').getElementsByTagName('div')[incorrectos]
             estrella_mala.className = 'estrella_on'
@@ -311,7 +312,8 @@ function upBasura(event){
                 alert("perdiste")
             }
         }
-        
+    }else{
+        basura_clicked.classList.remove('basura_cont_selected')
     }
 
     caneca_activa = null
@@ -322,6 +324,7 @@ function startGame(){
 
 }
 
+/////////////////INSTRUCTIVO//////////////
 var instructivo = getI('instructivo')
 var instructivo_txt = getI('instructivo_txt')
 var instructivo_state = 'off'
@@ -355,3 +358,52 @@ function unsetInstructivo(){
     instructivo.className = 'instructivo_off'
     instructivo_state = 'off'
 }
+
+/////////////////MENSAJE//////////////
+var mensaje = getI('mensaje')
+var mensaje_txt = getI('mensaje_txt')
+var mensaje_state = 'off'
+var animacion_mensaje = null
+
+function setMensaje(data){
+    clearTimeout(animacion_mensaje)
+    animacion_mensaje = null
+
+    if(mensaje_state=='off'){
+        mensaje_txt.innerHTML = data.msg
+        mensaje.className = 'mensaje_on'
+        mensaje_state = 'on'
+        animacion_mensaje = setTimeout(function(){
+            clearTimeout(animacion_mensaje)
+            animacion_mensaje = null
+            mensaje.className = 'mensaje_off'
+            mensaje_state = 'off'
+        },3000)
+    }else{
+        mensaje_state = 'off'
+        mensaje.className = 'mensaje_off'
+        animacion_mensaje = setTimeout(function(){
+            clearTimeout(animacion_mensaje)
+            animacion_mensaje = null
+            mensaje_txt.innerHTML = data.msg
+            mensaje.className = 'mensaje_on'
+            mensaje_state = 'on'
+
+            animacion_mensaje = setTimeout(function(){
+                clearTimeout(animacion_mensaje)
+                animacion_mensaje = null
+                mensaje.className = 'mensaje_off'
+                mensaje_state = 'off'
+            },3000)  
+        },200)
+    }
+}
+
+function unsetMensaje(){
+    clearTimeout(animacion_mensaje)
+    animacion_mensaje = null
+
+    mensaje.className = 'mensaje_off'
+    mensaje_state = 'off'
+}
+
