@@ -1,0 +1,27 @@
+@font-face {
+    font-family: 'Quicksand_Bold';
+    src: url('fonts/Quicksand_Bold.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Quicksand_Book';
+    src: url('fonts/Quicksand_Book.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Quicksand_Dash';
+    src: url('fonts/Quicksand_Dash.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Quicksand_Light';
+    src: url('fonts/Quicksand_Light.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

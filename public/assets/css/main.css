@@ -1,0 +1,451 @@
+* {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Opera and Firefox */
+}
+
+html,body{
+    width: 845px;
+    height: 507px;
+    overflow: hidden;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+#container{
+    width: 845px;
+    height: 507px;
+
+    position: relative;
+    border: rgba(0,0,0,0) solid 1px;
+    box-sizing: border-box;
+    margin: 0px auto;
+    padding: 0px;
+    overflow: hidden;
+    background-color: #FFFFFF;
+}
+
+#fondo{
+    position: absolute;    
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: 0px;
+    background-image: url(../images/fondo.png);
+}
+
+#contenedor_canecas{
+    position: absolute;
+    width: 536px;
+    height: 559px;
+    margin: 0px;
+    padding: 0px;
+    top: 90px;
+}
+#contenedor_canecas_img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-position: 0px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../images/barras.png);
+}
+#caneca_blanca,
+#caneca_negra,
+#caneca_verde,
+#caneca_roja
+{
+    position: absolute;
+    width: 137px;
+    height: 306px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+
+    transition: filter 0.3s, -webkit-filter 0.3s, -o-filter 0.3s;
+    -webkit-transition: filter 0.3s, -webkit-filter 0.3s, -o-filter 0.3s;
+}
+.caneca_activa{
+    filter: drop-shadow(0px 0px 5px rgba(153,255,0,1));
+    -webkit-filter: drop-shadow(0px 0px 5px rgba(153,255,0,1));
+    -o-filter: drop-shadow(0px 0px 5px rgba(153,255,0,1));
+}
+.caneca_deposita{
+    animation-name: animacion_caneca;
+    animation-duration: 0.3s;
+    animation-iteration-count: 1;
+    animation-timing-function: linear;
+    -webkit-animation-name: animacion_caneca;
+    -webkit-animation-duration: 0.3s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear;
+}
+@keyframes animacion_caneca{
+    0% {
+        margin-top: 0px;
+    }
+    10% {
+        margin-top: 2px;
+    }
+    20% {
+        margin-top: 4px;
+    }
+    30% {
+        margin-top: 2px;
+    }
+    40% {
+        margin-top: 0px;
+    }
+    50% {
+        margin-top: -2px;
+    }
+    60% {
+        margin-top: -4px;
+    }
+    70% {
+        margin-top: -2px;
+    }
+    80% {
+        margin-top: 0px;
+    }
+    90% {
+        margin-top: 2px;
+    }
+    100% {
+        margin-top: 0px;
+    }
+
+}
+
+#caneca_blanca{
+    top: 176px;
+    left: 0px;
+    background-image: url(../images/caneca_blanca.svg);
+}
+#caneca_negra{
+    top: 176px;
+    left: 132px;
+    background-image: url(../images/caneca_negra.svg);
+}
+#caneca_verde{
+    top: 176px;
+    left: 262px;
+    background-image: url(../images/caneca_verde.svg);
+}
+#caneca_roja{
+    top: 176px;
+    left: 400px;
+    background-image: url(../images/caneca_roja.svg);
+}
+
+#caneca_blanca_info{
+    top: 69px;
+    left: 35px;
+    width: 95px;
+}
+#caneca_negra_info{
+    top: 69px;
+    left: 140px;
+    width: 120px;
+}
+#caneca_verde_info{
+    top: 69px;
+    left: 270px;
+    width: 125px;
+}
+#caneca_roja_info{
+    top: 69px;
+    left: 405px;
+    width: 95px;
+}
+
+.caneca_info{
+    position: absolute;
+    height: 80px;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+}
+.caneca_info > div{
+    position: relative;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+.caneca_info > div > p{
+    display: block;
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Quicksand_Book';
+    font-size: 10px;
+    color: #003675;
+    text-align: center;
+    font-weight: normal;
+    line-height: normal;
+}
+.caneca_info > div > p > span{
+    font-family: 'Quicksand_Bold';
+    text-transform: uppercase;
+}
+    
+#scroll_basuras{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 200px;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-color: #CCCCCC #FFFFFF;
+    scrollbar-width: thin;
+}
+
+#scroll_basuras::-webkit-scrollbar,
+#scroll_basuras::-webkit-scrollbar {
+    width: 10px;
+    background-color: #FFFFFF;
+}
+#scroll_basuras::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #CCCCCC;
+}
+#contenedor_basuras{
+    position: relative;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+.basura_cont{
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    margin: 10px 0px;
+    /*border: #000 solid 1px;*/
+}
+.basura_cont_selected{
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    opacity: 0.2;
+}
+.basura_cont_marco{
+    position: relative;
+    width: 100%;
+    height: auto;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+.basura_cont_imagen{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: visible;
+}
+.basura_cont_marco img{
+    display: block;
+    opacity: 0.5;
+}
+.basura_cont_imagen div{
+    display: block;
+    cursor: grab;
+    position: relative;
+    background-position: 0px 0px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: 0px;
+    padding: 0px;
+}
+
+#residuo_tag{
+    position: absolute;
+    display: block;
+    background-position: center;
+    background-repeat: no-repeat;
+    /*background-size: 80% 80%;*/
+    box-sizing: border-box;
+    cursor: grabbing;
+}
+.residuo_tag_on{
+    visibility: visible;
+}
+.residuo_tag_off{
+    visibility: hidden;
+}
+
+#basura_label{
+    position: absolute;
+    width: auto;
+    max-width: 200px;
+    height: auto;
+    min-height: 25px;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-family: 'Quicksand_Book';
+    font-size: 14px;
+    color: #374B66;
+    text-align: center;
+    font-weight: normal;
+    line-height: normal;
+    background-color: #F5F4F4;
+
+    box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.2);
+    -o-box-shadow: 0px 0px 3px 1px rgba(0,0,0,0.2);
+}
+.basura_label_on{
+    visibility: visible;
+}
+.basura_label_off{
+    visibility: hidden;
+}
+
+#tapa_caneca_blanca{
+    top: 152px;
+    left: 21px;
+}
+#tapa_caneca_negra{
+    top: 150px;
+    left: 151px;
+}
+#tapa_caneca_verde{
+    top: 150px;
+    left: 280px;
+}
+#tapa_caneca_roja{
+    top: 149px;
+    left: 420px;
+}
+
+#iluminacion_caneca{
+    opacity: 0;
+    transition: opacity 0.5s;
+    -webkit-transition: opacity 0.5s;
+}
+
+.iluminacion_caneca_1{
+    top: 57px;
+    left: 11px;
+}
+.iluminacion_caneca_2{
+    top: 56px;
+    left: 140px;
+}
+.iluminacion_caneca_3{
+    top: 56px;
+    left: 270px;
+}
+.iluminacion_caneca_4{
+    top: 54px;
+    left: 410px;
+}
+
+/**************OTRAS COSAS****************/
+#instructivo{
+    position: absolute;
+    width: 410px;
+    box-sizing: border-box;
+    margin: 0px;
+    height: auto;
+    padding: 10px;
+    background-color: #FBC804;
+    top: 40px;
+
+    transition: left 0.2s;
+    -webkit-transition: left 0.2s;
+}
+.instructivo_off{
+    left: -410px;
+}
+.instructivo_on{
+    left: 0px;
+}
+#instructivo_txt{
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: 'Quicksand_Book';
+    font-size: 15px;
+    color: #000000;
+    text-align: right;
+    font-weight: normal;
+    line-height: normal;
+}
+#estrellas{
+    position: absolute;
+    box-sizing: border-box;
+    margin: 0px;
+    top: 40px;
+    right: 200px;
+    width: 40px;
+    width: calc(40px * 5);
+    width: -moz-calc(40px * 5);
+    height: 30px;
+}
+#estrellas > div{
+    position: relative;
+    float: left;
+    width: 30px;
+    height: 30px;
+    margin: 0px 5px;
+    box-sizing: border-box;
+    display: block;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: url(../images/star_on.svg);
+
+    transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s, -o-transform 0.5s;
+    -webkit-transition: opacity 0.5s, transform 0.5s, -webkit-transform 0.5s, -o-transform 0.5s;
+}
+
+.estrella_off{
+    opacity: 0.3;
+    transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    -o-transform: scale(0.8);
+}
+.estrella_on{
+    opacity: 1;
+    transform: scale(1);
+    -webkit-transform: scale(1);
+    -o-transform: scale(1);
+}

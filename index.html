@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reciclaje</title>
+    <link href="public/assets/css/fonts.css" rel="stylesheet" type="text/css" />
+    <link href="public/assets/css/main.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" type="text/css" href="public/spider/sprites/sprite.css" />
+    <link rel="stylesheet" type="text/css" href="public/spider/sprites/fotograma.css" />
+    <script language="javascript" src="public/assets/js/scormfunctions.js"></script>
+</head>
+
+<body onbeforeunload="doUnload(false);" onunload="doUnload();">
+<div id="container">
+    <div id="fondo"></div>
+    <div id="contenedor_canecas">
+        <div id="contenedor_canecas_img"></div>
+        <div id="caneca_blanca"></div>
+        <div id="caneca_negra"></div>
+        <div id="caneca_verde"></div>
+        <div id="caneca_roja"></div>
+
+        <div id="caneca_blanca_info" class="caneca_info">
+            <div>
+                <p><span>aprovechable</span></p>
+                <p>Deposita todos los residuos que no sean peligrosos y que no puedan aprovecharse</p>
+            </div>
+        </div>
+        <div id="caneca_negra_info" class="caneca_info">
+            <div>
+                <p><span>no aprovechable</span></p>
+                <p>Deposita los materiales reciclables limpios y secos, correspondientes a cartón, vidrio, papel, plástico, metales</p>
+            </div>
+        </div>
+        <div id="caneca_verde_info" class="caneca_info">
+            <div>
+                <p><span>orgánico</span></p>
+                <p>Deposita los desechos orgánicos que tienen la propiedad de poder desintegrarse o degradarse rápidamente</p>
+            </div>
+        </div>
+        <div id="caneca_roja_info" class="caneca_info">
+            <div>
+                <p><span>peligroso</span></p>
+                <p>Deposita los materiales fuentes de riesgo para el medio ambiente y la salud</p>
+            </div>
+        </div>
+
+        <div id="tapa_caneca_blanca" class="spd_sprite" width="95" height="32" frames="11" src="public/assets/media/tapa_caneca_blanca.png"></div>
+        <div id="tapa_caneca_negra" class="spd_sprite" width="101" height="32" frames="11" src="public/assets/media/tapa_caneca_negra.png"></div>
+        <div id="tapa_caneca_verde" class="spd_sprite" width="101" height="32" frames="11" src="public/assets/media/tapa_caneca_verde.png"></div>
+        <div id="tapa_caneca_roja" class="spd_sprite" width="95" height="32" frames="11" src="public/assets/media/tapa_caneca_roja.png"></div>
+        <div id="iluminacion_caneca" class="spd_sprite" width="119" height="125" frames="40" src="public/assets/media/iluminacion_caneca.png"></div>
+    </div>
+    <div id="estrellas">
+        <div class="estrella_off"></div>
+        <div class="estrella_off"></div>
+        <div class="estrella_off"></div>
+        <div class="estrella_off"></div>
+        <div class="estrella_off"></div>
+    </div>
+    <div id="scroll_basuras">
+        <div id="contenedor_basuras">
+            
+        </div>
+    </div>
+    <div id="residuo_tag" class="residuo_tag_off"></div>
+    <div id="basura_label" class="basura_label_off"></div>
+
+    <div id="instructivo" class="instructivo_off">
+        <p id="instructivo_txt"></p>
+    </div>
+    
+</div>
+
+<script src="public/spider/sprites/sprite.js"></script>
+<script src="public/spider/sprites/fotograma.js"></script>
+<script src="public/assets/js/jquery-3.5.0.min.js"></script>
+<script src="public/assets/js/cargador.js"></script>
+<script src="public/assets/js/main.js"></script>
+<script src="public/data.js"></script>
+
+<script>
+
+    var click_mp3 = null
+    var depositar_mp3 = null
+    var error_mp3 = null
+    var finish_mp3 = null
+    var over_mp3 = null
+    var tapa_mp3 = null
+    
+    window.onload = function(){
+        /*spdLoadSprite({idname:'tapa_caneca_blanca',autoplay:'off',callBack:function(){
+        spdLoadSprite({idname:'tapa_caneca_negra',autoplay:'off',callBack:function(){
+        spdLoadSprite({idname:'tapa_caneca_verde',autoplay:'off',callBack:function(){
+        spdLoadSprite({idname:'tapa_caneca_roja',autoplay:'off',callBack:function(){*/
+        spdLoadSprite({idname:'iluminacion_caneca',autoplay:'off',callBack:function(){
+            
+            spdCreateAnimation({id:0,sprite:'iluminacion_caneca'})
+            /*spdCreateAnimation({id:1,sprite:'tapa_caneca_blanca'})
+            spdCreateAnimation({id:2,sprite:'tapa_caneca_negra'})
+            spdCreateAnimation({id:3,sprite:'tapa_caneca_verde'})
+            spdCreateAnimation({id:4,sprite:'tapa_caneca_roja'})*/
+
+            loadAudio({src:'public/assets/media/click.mp3',callBack:function(data){
+            click_mp3 = data
+            loadAudio({src:'public/assets/media/depositar.mp3',callBack:function(data){
+            depositar_mp3 = data
+            loadAudio({src:'public/assets/media/error.mp3',callBack:function(data){
+            error_mp3 = data
+            loadAudio({src:'public/assets/media/finish.mp3',callBack:function(data){
+            finish_mp3 = data
+            loadAudio({src:'public/assets/media/over.mp3',callBack:function(data){
+            over_mp3 = data
+            loadAudio({src:'public/assets/media/tapa_open.mp3',callBack:function(data){
+                tapa_mp3 = data
+                spdPlayAnimation({frame:1,stop:0,loop:true},0)
+                loadResiduos()
+
+
+            }})
+            }})
+            }})
+            }})
+            }})
+            }})
+
+        }})
+        /*}})
+        }})
+        }})
+        }})*/
+        
+    }
+
+</script>
+    
+</body>
+</html>
