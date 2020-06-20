@@ -84,11 +84,13 @@
 <script>
 
     var click_mp3 = null
+    var correcto_mp3 = null
     var depositar_mp3 = null
     var error_mp3 = null
     var finish_mp3 = null
     var over_mp3 = null
     var tapa_mp3 = null
+    
     
     window.onload = function(){
         /*spdLoadSprite({idname:'tapa_caneca_blanca',autoplay:'off',callBack:function(){
@@ -105,6 +107,8 @@
 
             loadAudio({src:'public/assets/media/click.mp3',callBack:function(data){
             click_mp3 = data
+            loadAudio({src:'public/assets/media/correcto.mp3',callBack:function(data){
+            correcto_mp3 = data
             loadAudio({src:'public/assets/media/depositar.mp3',callBack:function(data){
             depositar_mp3 = data
             loadAudio({src:'public/assets/media/error.mp3',callBack:function(data){
@@ -119,6 +123,7 @@
                 loadResiduos()
 
 
+            }})
             }})
             }})
             }})
