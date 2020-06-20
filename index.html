@@ -74,17 +74,32 @@
     <div id="mensaje" class="mensaje_off">
         <p id="mensaje_txt"></p>
     </div>
-    
+
+    <div id="cargador" class="cargador_on">
+        <div id="cargador_cont">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div id="cargador_txt"></div>
+    </div>
 </div>
 
 <script src="public/spider/sprites/sprite.js"></script>
 <script src="public/spider/sprites/fotograma.js"></script>
 <script src="public/assets/js/jquery-3.5.0.min.js"></script>
-<script src="public/assets/js/cargador.js"></script>
 <script src="public/assets/js/main.js"></script>
+<script src="public/assets/js/cargador.js"></script>
 <script src="public/data.js"></script>
 
 <script>
+
+    setCargador()
+    loadResiduos()
+
+    var elementos_cargar = residuos.length+8
+    var porcentaje_carga = Math.round((100/elementos_cargar))
 
     var click_mp3 = null
     var correcto_mp3 = null
@@ -94,14 +109,13 @@
     var over_mp3 = null
     var tapa_mp3 = null
     
-    
     window.onload = function(){
         /*spdLoadSprite({idname:'tapa_caneca_blanca',autoplay:'off',callBack:function(){
         spdLoadSprite({idname:'tapa_caneca_negra',autoplay:'off',callBack:function(){
         spdLoadSprite({idname:'tapa_caneca_verde',autoplay:'off',callBack:function(){
         spdLoadSprite({idname:'tapa_caneca_roja',autoplay:'off',callBack:function(){*/
         spdLoadSprite({idname:'iluminacion_caneca',autoplay:'off',callBack:function(){
-            
+            setCargadorText2()
             spdCreateAnimation({id:0,sprite:'iluminacion_caneca'})
             /*spdCreateAnimation({id:1,sprite:'tapa_caneca_blanca'})
             spdCreateAnimation({id:2,sprite:'tapa_caneca_negra'})
@@ -110,20 +124,27 @@
 
             loadAudio({src:'public/assets/media/click.mp3',callBack:function(data){
             click_mp3 = data
+            setCargadorText2()
             loadAudio({src:'public/assets/media/correcto.mp3',callBack:function(data){
             correcto_mp3 = data
+            setCargadorText2()
             loadAudio({src:'public/assets/media/depositar.mp3',callBack:function(data){
             depositar_mp3 = data
+            setCargadorText2()
             loadAudio({src:'public/assets/media/error.mp3',callBack:function(data){
             error_mp3 = data
+            setCargadorText2()
             loadAudio({src:'public/assets/media/finish.mp3',callBack:function(data){
             finish_mp3 = data
+            setCargadorText2()
             loadAudio({src:'public/assets/media/over.mp3',callBack:function(data){
             over_mp3 = data
+            setCargadorText2()
             loadAudio({src:'public/assets/media/tapa_open.mp3',callBack:function(data){
                 tapa_mp3 = data
+                setCargadorText2()
                 spdPlayAnimation({frame:1,stop:0,loop:true},0)
-                loadResiduos()
+                loadResiduo(0)
 
 
             }})

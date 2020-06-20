@@ -42,12 +42,12 @@ function loadResiduos(){
             })
         }
     }
-    loadResiduo(0)
 }
 
 function loadResiduo(r){
     if(r==residuos.length){
         printResiduos()
+        unsetCargador()
     }else{
         var image = new Image()
         image.onload = function(){
@@ -66,6 +66,7 @@ function loadResiduo(r){
 
                 residuos[r].width_borde = this.width
                 residuos[r].height_borde = this.height
+                setCargadorText2()
                 loadResiduo((r+1))
             }
             image2.onerror = function(){

@@ -490,7 +490,7 @@ html,body{
     background-image: url(../images/hojita.svg);
 }
 .mensaje_off{
-    right: -300px;
+    right: -310px;
 }
 .mensaje_on{
     right: 0px;
@@ -508,4 +508,94 @@ html,body{
     text-align: left;
     font-weight: normal;
     line-height: normal;
+}
+
+/***********CARGADOR*************/
+#cargador{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    margin: 0px;
+    padding: 0px;
+    background-color: #FFFFFF;
+}
+
+.cargador_on{
+    opacity: 1;
+    filter: blur(0);
+    -webkit-filter: blur(0);
+    -o-filter: blur(0);
+    visibility: visible;
+    transition: opacity 0.5s, filter 0.5s, -webkit-filter 0.5s, -o-filter 0.5s, visibility 0s;
+    -webkit-transition: opacity 0.5s, filter 0.5s, -webkit-filter 0.5s, -o-filter 0.5s, visibility 0s;
+}
+.cargador_off{
+    opacity: 0;
+    filter: blur(5);
+    -webkit-filter: blur(5);
+    -o-filter: blur(5);
+    visibility: hidden;
+    transition: opacity 0.5s, filter 0.5s, -webkit-filter 0.5s, -o-filter 0.5s, visibility 0.5s;
+    -webkit-transition: opacity 0.5s, filter 0.5s, -webkit-filter 0.5s, -o-filter 0.5s, visibility 0.5s;
+}
+
+#cargador_cont{
+    position: absolute;
+    box-sizing: border-box;
+    width: 90px;
+    height: 156px;
+    margin: 0px;
+    padding: 0px;
+    padding-top: 30px;
+    top: 50%;
+    top: calc(50% - 160px);
+    top: -moz-calc(50% - 160px);
+    left: 50%;
+    left: calc(50% - (90px / 2));
+    left: -moz-calc(50% - (90px / 2));
+
+    background-position: 0px 0px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url(../images/cargador_marco.svg);
+}
+#cargador_cont > div{
+    position: relative;
+    width: 52px;
+    height: 24px;
+    box-sizing: border-box;
+    margin: 0px auto;
+    margin-bottom: 5px;
+    padding: 0px;
+
+    transition: background-color 0.1s;
+    -webkit-transition: background-color 0.1s;
+}
+.cargador_bateria_off{
+    background-color: #E9F1D6;
+}
+.cargador_bateria_on{
+    background-color: #609D3D;
+}
+    
+#cargador_txt{
+    position: absolute;   
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+
+    font-family: 'Quicksand_Book';
+    font-size: 16px;
+    color: #A9897F;
+    font-weight: normal;
+    line-height: normal;
+    text-align: center;
+    display: block;
+    top: 50%;
+    top: calc(50% + 4px);
+    top: -moz-calc(50% + 4px);
+    left: 0px;
 }

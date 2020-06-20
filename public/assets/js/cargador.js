@@ -31,27 +31,63 @@ function loadAudio(data){
     })
 }
 
-var cargador = document.getElementById('cargador')
-var cargador_icon_bar = document.getElementById('cargador-icon-bar')
-var cargador_txt = document.getElementById('cargador-txt')
+var cargador = getI('cargador')
+var cargador_txt = getI('cargador_txt')
+var cargador_barras = getI('cargador_cont').getElementsByTagName('div')
+var animacion_cargador = null
 
-function setCargadorPercent(p){
-    cargador_icon_bar.style.top = (100-p)+'%'
-    cargador_icon_bar.style.height = p+'%'
-    cargador_txt.innerHTML = 'Cargando '+p+'%'
+function setCargador(){
+    cargador.className = 'cargador_on'
+    setCargadorText('Cargando...')
+    animacion_cargador = setInterval(animacionCargador,200)
 }
 
-var animation_cargador = null
-function unsetCargador(data){
-    cargador.className = 'cargador-off'
-    animation_cargador = setTimeout(function(){
-        clearTimeout(animation_cargador)
-        animation_cargador = null
-        data.callBack()
-    },50)
-    
+var secuencia = 0
+function animacionCargador(){
+    if(secuencia==0){
+        cargador_barras[0].className = 'cargador_bateria_off'
+        cargador_barras[1].className = 'cargador_bateria_off'
+        cargador_barras[2].className = 'cargador_bateria_off'
+        cargador_barras[3].className = 'cargador_bateria_off'
+    }else if(secuencia==1){
+        cargador_barras[0].className = 'cargador_bateria_off'
+        cargador_barras[1].className = 'cargador_bateria_off'
+        cargador_barras[2].className = 'cargador_bateria_off'
+        cargador_barras[3].className = 'cargador_bateria_on'
+    }else if(secuencia==2){
+        cargador_barras[0].className = 'cargador_bateria_off'
+        cargador_barras[1].className = 'cargador_bateria_off'
+        cargador_barras[2].className = 'cargador_bateria_on'
+        cargador_barras[3].className = 'cargador_bateria_on'
+    }else if(secuencia==3){
+        cargador_barras[0].className = 'cargador_bateria_off'
+        cargador_barras[1].className = 'cargador_bateria_on'
+        cargador_barras[2].className = 'cargador_bateria_on'
+        cargador_barras[3].className = 'cargador_bateria_on'
+    }else if(secuencia==4){
+        cargador_barras[0].className = 'cargador_bateria_on'
+        cargador_barras[1].className = 'cargador_bateria_on'
+        cargador_barras[2].className = 'cargador_bateria_on'
+        cargador_barras[3].className = 'cargador_bateria_on'
+    }
+    secuencia++
+    if(secuencia==5){
+        secuencia = 0
+    }
 }
-function cerrarInstructivo(){
-    var instr = document.getElementById('instructivo')
-    instr.style.display = 'none'
+
+function setCargadorText(txt){
+    cargador_txt.innerHTML = txt
+}
+
+var element_loaded = 1
+function setCargadorText2(){
+    setCargadorText('Cargando '+(porcentaje_carga*element_loaded)+'%')
+    element_loaded++
+}
+
+function unsetCargador(){
+    clearInterval(animacion_cargador)
+    animacion_cargador = null
+    cargador.className = 'cargador_off'
 }
