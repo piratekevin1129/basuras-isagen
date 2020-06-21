@@ -86,8 +86,17 @@ function setCargadorText2(){
     element_loaded++
 }
 
+function fillCargador(){
+    secuencia = 0
+    cargador_barras[0].className = 'cargador_bateria_on'
+    cargador_barras[1].className = 'cargador_bateria_on'
+    cargador_barras[2].className = 'cargador_bateria_on'
+    cargador_barras[3].className = 'cargador_bateria_on'
+    clearInterval(animacion_cargador)
+}
+
 function unsetCargador(){
     clearInterval(animacion_cargador)
-    animacion_cargador = null
+    //animacion_cargador = null
     cargador.className = 'cargador_off'
 }

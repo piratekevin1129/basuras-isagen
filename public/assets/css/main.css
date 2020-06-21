@@ -42,7 +42,7 @@ html,body{
     background-image: url(../images/fondo.png);
 }
 
-#contenedor_canecas{
+.contenedor_canecas{
     position: absolute;
     width: 536px;
     height: 559px;
@@ -52,13 +52,6 @@ html,body{
     left: 20px;
 }
 #contenedor_canecas_img{
-    position: absolute;
-    width: 536px;
-    height: 559px;
-    margin: 0px;
-    padding: 0px;
-    top: 90px;
-    left: 20px;
     background-position: 0px;
     background-repeat: no-repeat;
     background-size: cover;
@@ -482,7 +475,7 @@ html,body{
 
 #mensaje{
     position: absolute;
-    width: 250px;
+    width: 270px;
     box-sizing: border-box;
     margin: 0px;
     height: auto;
@@ -510,7 +503,7 @@ html,body{
     background-image: url(../images/hojita.svg);
 }
 .mensaje_off{
-    right: -260px;
+    right: -280px;
 }
 .mensaje_on{
     right: 0px;
@@ -528,6 +521,9 @@ html,body{
     text-align: center;
     font-weight: normal;
     line-height: normal;
+}
+#mensaje_txt span{
+    font-family: 'Quicksand_Bold';
 }
 
 /***********CARGADOR*************/
@@ -553,9 +549,9 @@ html,body{
 }
 .cargador_off{
     opacity: 0;
-    filter: blur(5);
-    -webkit-filter: blur(5);
-    -o-filter: blur(5);
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    -o-filter: blur(5px);
     visibility: hidden;
     transition: opacity 0.5s, filter 0.5s, -webkit-filter 0.5s, -o-filter 0.5s, visibility 0.5s;
     -webkit-transition: opacity 0.5s, filter 0.5s, -webkit-filter 0.5s, -o-filter 0.5s, visibility 0.5s;

@@ -9,10 +9,31 @@ function getI(idname){
     return document.getElementById(idname)
 }
 
+function fillRandomArray(len){
+    var new_arr = []
+    while(new_arr.length<len){
+        var rand = getRand(0,(len-1))
+        if(!new_arr.includes(rand)){
+            new_arr.push(rand)
+        }
+    }
+    return new_arr
+}
+function unorderArray(arr){
+    var nueva = fillRandomArray(arr.length)
+    var new_arr = []
+    for(var n = 0;n<nueva.length;n++){
+        new_arr.push(arr[nueva[n]])
+    }
+    return new_arr
+}
+
 var game_width = 845
 var game_height = 507
 
+var pre_residuos = []
 var residuos = []
+var num_rand = 4
 
 function findResiduoData(id,cat){
     var data = null
@@ -24,30 +45,66 @@ function findResiduoData(id,cat){
     return data
 }
 
-function loadResiduos(){
-    for(i = 0;i<residuos_data.length;i++){
-        var categoria_data = residuos_data[i]
-        var residuos_categoria = categoria_data.basuras
-        for(j = 0;j<residuos_categoria.length;j++){
-            residuos.push({
-                id:residuos_categoria[j].id,
-                nombre:residuos_categoria[j].nombre,
-                descripcion:residuos_categoria[j].descripcion,
-                src:residuos_categoria[j].img,
-                categoria:categoria_data.categoria,
-                width:0,
-                height:0,
-                width_borde:0,
-                height_borde:0
-            })
+function isInArray(obj,array){
+    var is_obj = false
+    for(k = 0;k<array.length;k++){
+        if(array[k].cat==obj.cat&&array[k].ind==obj.ind){
+            is_obj = true
         }
+    }
+    return is_obj
+}
+
+function loadResiduos(){
+    var categorias_orden = []
+    for(i = 0;i<residuos_data.length;i++){
+        for(j = 0;j<num_rand;j++){
+            categorias_orden.push(i)
+        }
+    }
+    var categorias_desorden = unorderArray(categorias_orden)
+    
+    //sacar los necesarios
+    var c = 0
+    while(pre_residuos.length<categorias_desorden.length){
+        var rand_cat = categorias_desorden[c]
+        var article = getRand(0,(residuos_data[rand_cat].basuras.length-1))
+        var obj = {cat:rand_cat,ind:article}
+        if(!isInArray(obj,pre_residuos)){
+            pre_residuos.push(obj)
+            c++
+        }
+    }
+    //console.log(pre_residuos)
+
+    for(i = 0;i<pre_residuos.length;i++){
+        var cat = pre_residuos[i].cat
+        var ind = pre_residuos[i].ind
+        var residuos_categoria = residuos_data[cat].basuras[ind]
+        residuos.push({
+            id:residuos_categoria.id,
+            nombre:residuos_categoria.nombre,
+            descripcion:residuos_categoria.descripcion,
+            src:residuos_categoria.img,
+            categoria:residuos_data[cat].categoria,
+            width:0,
+            height:0,
+            width_borde:0,
+            height_borde:0
+        })
     }
 }
 
 function loadResiduo(r){
     if(r==residuos.length){
         printResiduos()
-        unsetCargador()
+        fillCargador()
+
+        setCargadorText('Haz click para comenzar')
+        cargador.onclick = function(){
+            unsetCargador()
+        }
+        
     }else{
         var image = new Image()
         image.onload = function(){
@@ -84,62 +141,38 @@ function loadResiduo(r){
 var residuos_seleccionados = []
 
 function printResiduos(){
-    //seleccionar 4 residuos de cada categoria al azar
-    for(i = 1;i<=4;i++){
-        var seleccionados = []
-        var seleccionados_id = []
-        while(seleccionados.length<4){
-            var residuos_disponibles = residuos_data[i-1].basuras
-            var num = getRand(0,(residuos_disponibles.length-1))
-            if(!seleccionados.includes(num)){
-                seleccionados.push(num)
-                seleccionados_id.push(residuos_disponibles[num].id)
-            }
-        }
+    for(i = 0;i<residuos.length;i++){
+        var cat = residuos[i].categoria
+        var id = residuos[i].id
+        var residuo_info = findResiduoData(id,cat)
+            
+        var div_residuo = document.createElement('div')
+        div_residuo.className = 'basura_cont'
+        var id_name = 'basura_id_'+id+'_'+cat
+        div_residuo.id = id_name
+
+        var div_imagen = document.createElement('div')
+        div_imagen.className = 'basura_cont_imagen'
+        var div_marco = document.createElement('div')
+        div_marco.className = 'basura_cont_marco'
+
+        var image_producto = document.createElement('div')
+        image_producto.style.width = residuo_info.width+'px'
+        image_producto.style.height = residuo_info.height+'px'
+        image_producto.style.backgroundImage = 'url(public/assets/basuras/'+residuo_info.src+'.png)'
+        image_producto.setAttribute('onmouseover',"overBasura(this,'"+id_name+"','"+residuo_info.nombre+"')")
+        image_producto.setAttribute('onmouseout',"outBasura('"+id_name+"','"+residuo_info.nombre+"')")
+        image_producto.setAttribute('onmousedown',"downBasura(event,"+residuo_info.id+","+cat+")")
+        var image_borde = document.createElement('img')
+        image_borde.src = 'public/assets/basuras/marcos/'+residuo_info.src+'.png'
         
-        var obj_push = []
-        for(j = 0;j<seleccionados.length;j++){
-            obj_push.push({id:seleccionados_id[j]})
-        }
-        residuos_seleccionados.push(obj_push)
-    }
+        div_imagen.appendChild(image_producto)
+        div_marco.appendChild(image_borde)
+        
+        div_residuo.appendChild(div_marco)
+        div_residuo.appendChild(div_imagen)
 
-    console.log(residuos_seleccionados)
-    
-    for(i = 0;i<residuos_seleccionados.length;i++){
-        var cat = residuos_data[i].categoria
-        var residuos_cat = residuos_seleccionados[i]
-        for(j = 0;j<residuos_cat.length;j++){
-            var residuo_info = findResiduoData(residuos_cat[j].id,cat)
-            var div_residuo = document.createElement('div')
-            div_residuo.className = 'basura_cont'
-            var id_name = 'basura_id_'+residuos_cat[j].id+'_'+cat
-            div_residuo.id = id_name
-
-            var div_imagen = document.createElement('div')
-            div_imagen.className = 'basura_cont_imagen'
-            var div_marco = document.createElement('div')
-            div_marco.className = 'basura_cont_marco'
-
-            var image_producto = document.createElement('div')
-            image_producto.style.width = residuo_info.width+'px'
-            image_producto.style.height = residuo_info.height+'px'
-            image_producto.style.backgroundImage = 'url(public/assets/basuras/'+residuo_info.src+'.png)'
-            image_producto.setAttribute('onmouseover',"overBasura(this,'"+id_name+"','"+residuo_info.nombre+"')")
-            image_producto.setAttribute('onmouseout',"outBasura('"+id_name+"','"+residuo_info.nombre+"')")
-            image_producto.setAttribute('onmousedown',"downBasura(event,"+residuos_cat[j].id+","+cat+")")
-            var image_borde = document.createElement('img')
-            image_borde.src = 'public/assets/basuras/marcos/'+residuo_info.src+'.png'
-
-            
-            div_imagen.appendChild(image_producto)
-            div_marco.appendChild(image_borde)
-            
-            div_residuo.appendChild(div_marco)
-            div_residuo.appendChild(div_imagen)
-
-            getI('contenedor_basuras').appendChild(div_residuo)
-        }
+        getI('contenedor_basuras').appendChild(div_residuo)
     }
 }
 
@@ -184,7 +217,7 @@ var residuo_actual = null
 var basura_clicked = null
 
 function downBasura(event,id,cat){
-    if(!animating_depositar){
+    if(!animating_depositar&&!game_finished){
         click_mp3.play()
         var posx = event.pageX
         var posy = event.pageY
@@ -268,7 +301,6 @@ function moveBasura(event){
             }
             caneca_abierta_ind = caneca_activa_ind
             //spdPlayAnimation({frame:1,stop:6,loop:false},caneca_abierta_ind)
-            console.log("play tapa")
             tapa_mp3.play()
         }
     }else{
@@ -281,6 +313,9 @@ function moveBasura(event){
 }
 
 var incorrectos = 0
+var correctos = 0
+var game_finished = false
+
 function upBasura(event){
     document.body.removeEventListener('mousemove',moveBasura,false)
     document.body.removeEventListener('mouseup',upBasura,false)
@@ -294,6 +329,7 @@ function upBasura(event){
         //spdPlayAnimation({frame:7,stop:11,loop:false},caneca_abierta_ind)
         caneca_abierta_ind = 0
     }
+    unsetInstructivo()
     
     if(caneca_activa!=null){
         var cat = residuo_actual.categoria
@@ -304,9 +340,7 @@ function upBasura(event){
             img_click_action.setAttribute('onmousedown','')
 
             depositarBasura()
-
             correcto_mp3.play()
-            setMensaje({msg:'Correcto!!<br />Continúa asi'})
         }else{
             caneca_activa = null
             caneca_activa_ind = 0
@@ -315,11 +349,14 @@ function upBasura(event){
             
             var estrella_mala = getI('estrellas').getElementsByTagName('div')[incorrectos]
             estrella_mala.className = 'estrella_on'
-            setMensaje({msg:'Este residuo no pertenece a esta categoría'})
+            
             error_mp3.play()
             incorrectos++
             if(incorrectos==5){
-                alert("perdiste")
+                game_finished = true
+                setMensaje({msg:'<span>Las oportunidades terminaron y el juego tambien</span>!!<br />Vuelve a intentarlo',close:false})
+            }else{
+                setMensaje({msg:'Este residuo no pertenece a esta categoría'})
             }
         }
     }else{
@@ -334,6 +371,7 @@ var animacion_depositar = null
 var animating_depositar = false
 
 function depositarBasura(){
+    correctos++
     var rect_caneca = caneca_activa.getBoundingClientRect()
     var left_residuo = rect_caneca.left+((rect_caneca.width/2)-(residuo_tag_width/2))
     animating_depositar = true
@@ -355,16 +393,26 @@ function depositarBasura(){
 
                 animating_depositar = false
                 residuo_tag2.className = 'residuo_tag_off'
+                setMensaje({msg:'¡Muy bien!<br /> Continúa asi'})
             },250)
             
             depositar_mp3.play()
             caneca_activa.className = 'caneca_deposita'
             caneca_activa = null
             caneca_activa_ind = 0
+            checkFinalizar()
             
         },250)
 
     },50)
+}
+
+function checkFinalizar(){
+    if(correctos==residuos.length){
+        finish_mp3.play()
+        game_finished = true
+        setMensaje({msg:'<span>¡Excelente!</span><br />Has completado la actividad'})
+    }
 }
 
 function startGame(){
@@ -381,7 +429,6 @@ function setInstructivo(data){
     clearTimeout(animacion_instructivo)
     animacion_instructivo = null
 
-    console.log(instructivo_state)
     if(instructivo_state=='off'){
         instructivo_txt.innerHTML = data.msg
         instructivo.className = 'instructivo_on'
@@ -420,12 +467,17 @@ function setMensaje(data){
         mensaje_txt.innerHTML = data.msg
         mensaje.className = 'mensaje_on'
         mensaje_state = 'on'
-        animacion_mensaje = setTimeout(function(){
-            clearTimeout(animacion_mensaje)
-            animacion_mensaje = null
-            mensaje.className = 'mensaje_off'
-            mensaje_state = 'off'
-        },3000)
+        if(data.close!=null&&data.close!=undefined){
+            
+        }else{
+            animacion_mensaje = setTimeout(function(){
+                clearTimeout(animacion_mensaje)
+                animacion_mensaje = null
+                mensaje.className = 'mensaje_off'
+                mensaje_state = 'off'
+            },3000)
+        }
+        
     }else{
         mensaje_state = 'off'
         mensaje.className = 'mensaje_off'
@@ -436,12 +488,16 @@ function setMensaje(data){
             mensaje.className = 'mensaje_on'
             mensaje_state = 'on'
 
-            animacion_mensaje = setTimeout(function(){
-                clearTimeout(animacion_mensaje)
-                animacion_mensaje = null
-                mensaje.className = 'mensaje_off'
-                mensaje_state = 'off'
-            },3000)  
+            if(data.close!=null&&data.close!=undefined){
+                
+            }else{
+                animacion_mensaje = setTimeout(function(){
+                    clearTimeout(animacion_mensaje)
+                    animacion_mensaje = null
+                    mensaje.className = 'mensaje_off'
+                    mensaje_state = 'off'
+                },3000)
+            }
         },300)
     }
 }
