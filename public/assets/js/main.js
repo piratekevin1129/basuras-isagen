@@ -176,6 +176,7 @@ function outBasura(id_name,label_name){
 }
 
 var residuo_tag = getI('residuo_tag')
+var residuo_tag2 = getI('residuo_tag2')
 var residuo_tag_width = 0
 var residuo_tag_height = 0
 var iluminacion_caneca = getI('iluminacion_caneca')
@@ -183,30 +184,35 @@ var residuo_actual = null
 var basura_clicked = null
 
 function downBasura(event,id,cat){
-    click_mp3.play()
-    var posx = event.pageX
-    var posy = event.pageY
+    if(!animating_depositar){
+        click_mp3.play()
+        var posx = event.pageX
+        var posy = event.pageY
 
-    basura_clicked = getI('basura_id_'+id+'_'+cat)
-    basura_clicked.classList.add('basura_cont_selected')
+        basura_clicked = getI('basura_id_'+id+'_'+cat)
+        basura_clicked.classList.add('basura_cont_selected')
 
-    residuo_actual = findResiduoData(id,cat)
+        residuo_actual = findResiduoData(id,cat)
 
-    residuo_tag_width = residuo_actual.width
-    residuo_tag_height = residuo_actual.height
+        residuo_tag_width = residuo_actual.width
+        residuo_tag_height = residuo_actual.height
 
-    residuo_tag.style.width = residuo_actual.width+'px'
-    residuo_tag.style.height = residuo_actual.height+'px'
-    residuo_tag.style.backgroundImage = 'url(public/assets/basuras/'+residuo_actual.src+'.png)'
+        residuo_tag.style.width = residuo_actual.width+'px'
+        residuo_tag.style.height = residuo_actual.height+'px'
+        residuo_tag.style.backgroundImage = 'url(public/assets/basuras/'+residuo_actual.src+'.png)'
+        residuo_tag2.style.width = residuo_actual.width+'px'
+        residuo_tag2.style.height = residuo_actual.height+'px'
+        residuo_tag2.style.backgroundImage = 'url(public/assets/basuras/'+residuo_actual.src+'.png)'
 
-    residuo_tag.style.left = (posx-(residuo_tag_width/2))+'px'
-    residuo_tag.style.top = (posy-(residuo_tag_height/2))+'px'
-    residuo_tag.className = 'residuo_tag_on'
+        residuo_tag.style.left = (posx-(residuo_tag_width/2))+'px'
+        residuo_tag.style.top = (posy-(residuo_tag_height/2))+'px'
+        residuo_tag.className = 'residuo_tag_on'
 
-    document.body.addEventListener('mousemove',moveBasura,false)
-    document.body.addEventListener('mouseup',upBasura,false)
+        document.body.addEventListener('mousemove',moveBasura,false)
+        document.body.addEventListener('mouseup',upBasura,false)
 
-    setInstructivo({msg:residuo_actual.descripcion})
+        setInstructivo({msg:residuo_actual.descripcion})
+    }
 }
 
 var canecas_rect = [
@@ -278,8 +284,7 @@ var incorrectos = 0
 function upBasura(event){
     document.body.removeEventListener('mousemove',moveBasura,false)
     document.body.removeEventListener('mouseup',upBasura,false)
-    residuo_tag.className = 'residuo_tag_off'
-    
+        
     for(i = 0;i<canecas.length;i++){
         canecas[i].className = ''
     }
@@ -298,15 +303,19 @@ function upBasura(event){
             var img_click_action = div_click_action.getElementsByTagName('div')[0]
             img_click_action.setAttribute('onmousedown','')
 
+            depositarBasura()
+
             correcto_mp3.play()
-            caneca_activa.className = 'caneca_deposita'
-            setInstructivo({msg:'Correcto!!<br />Continúa asi'})
+            setMensaje({msg:'Correcto!!<br />Continúa asi'})
         }else{
+            caneca_activa = null
+            caneca_activa_ind = 0
+            residuo_tag.className = 'residuo_tag_off'
             basura_clicked.classList.remove('basura_cont_selected')
             
             var estrella_mala = getI('estrellas').getElementsByTagName('div')[incorrectos]
             estrella_mala.className = 'estrella_on'
-            setInstructivo({msg:'Este residuo no pertenece a esta categoría'})
+            setMensaje({msg:'Este residuo no pertenece a esta categoría'})
             error_mp3.play()
             incorrectos++
             if(incorrectos==5){
@@ -314,11 +323,48 @@ function upBasura(event){
             }
         }
     }else{
+        residuo_tag.className = 'residuo_tag_off'
         basura_clicked.classList.remove('basura_cont_selected')
+        caneca_activa = null
+        caneca_activa_ind = 0
     }
+}
 
-    caneca_activa = null
-    caneca_activa_ind = 0
+var animacion_depositar = null
+var animating_depositar = false
+
+function depositarBasura(){
+    var rect_caneca = caneca_activa.getBoundingClientRect()
+    var left_residuo = rect_caneca.left+((rect_caneca.width/2)-(residuo_tag_width/2))
+    animating_depositar = true
+    
+    animacion_depositar = setTimeout(function(){
+        residuo_tag.classList.add('residuo_tag_animate1')
+        residuo_tag2.classList.add('residuo_tag_animate1')
+        residuo_tag.style.left = left_residuo+'px'
+        residuo_tag2.style.left = left_residuo+'px'
+        clearTimeout(animacion_depositar)
+
+        animacion_depositar = setTimeout(function(){
+            clearTimeout(animacion_depositar)
+            residuo_tag.className = 'residuo_tag_off'
+            residuo_tag2.className = 'residuo_tag_on residuo_tag_animate2'
+            animacion_depositar = setTimeout(function(){
+                clearTimeout(animacion_depositar)
+                animacion_depositar = null
+
+                animating_depositar = false
+                residuo_tag2.className = 'residuo_tag_off'
+            },250)
+            
+            depositar_mp3.play()
+            caneca_activa.className = 'caneca_deposita'
+            caneca_activa = null
+            caneca_activa_ind = 0
+            
+        },250)
+
+    },50)
 }
 
 function startGame(){
@@ -348,7 +394,7 @@ function setInstructivo(data){
             instructivo_txt.innerHTML = data.msg
             instructivo.className = 'instructivo_on'
             instructivo_state = 'on'
-        },200)
+        },300)
     }
 }
 
@@ -396,7 +442,7 @@ function setMensaje(data){
                 mensaje.className = 'mensaje_off'
                 mensaje_state = 'off'
             },3000)  
-        },200)
+        },300)
     }
 }
 

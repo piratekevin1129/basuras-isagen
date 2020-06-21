@@ -49,13 +49,16 @@ html,body{
     margin: 0px;
     padding: 0px;
     top: 90px;
+    left: 20px;
 }
 #contenedor_canecas_img{
     position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0px;
-    left: 0px;
+    width: 536px;
+    height: 559px;
+    margin: 0px;
+    padding: 0px;
+    top: 90px;
+    left: 20px;
     background-position: 0px;
     background-repeat: no-repeat;
     background-size: cover;
@@ -292,7 +295,7 @@ html,body{
     padding: 0px;
 }
 
-#residuo_tag{
+#residuo_tag,#residuo_tag2{
     position: absolute;
     display: block;
     background-position: center;
@@ -306,6 +309,19 @@ html,body{
 }
 .residuo_tag_off{
     visibility: hidden;
+}
+.residuo_tag_animate1{
+    top: 80px !important;
+    transition: top 0.25s ease-out, left 0.25s ease-out;
+    -webkit-transition: top 0.25s ease-out, left 0.25s ease-out;
+}
+.residuo_tag_animate2{
+    top: 350px !important;
+    transform: scale(0.5);
+    -webkit-transform: scale(0.5);
+    -o-transform: scale(0.5);
+    transition: top 0.25s ease-in, left 0.25s ease-in, transform 0.25s ease-in, -webkit-transform 0.25s ease-in, -o-transform 0.25s ease-in;
+    -webkit-transition: top 0.25s ease-in, left 0.25s ease-in, transform 0.25s ease-in, -webkit-transform 0.25s ease-in, -o-transform 0.25s ease-in;
 }
 
 #basura_label{
@@ -401,8 +417,8 @@ html,body{
     background-color: #FBC804;
     top: 30px;
 
-    transition: left 0.2s;
-    -webkit-transition: left 0.2s;
+    transition: left 0.3s;
+    -webkit-transition: left 0.3s;
 }
 .instructivo_off{
     left: -410px;
@@ -466,7 +482,7 @@ html,body{
 
 #mensaje{
     position: absolute;
-    width: 300px;
+    width: 250px;
     box-sizing: border-box;
     margin: 0px;
     height: auto;
@@ -474,8 +490,12 @@ html,body{
     background-color: #81AF4C;
     top: 80%;
 
-    transition: right 0.2s;
-    -webkit-transition: right 0.2s;
+    filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.5));
+    -webkit-filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.5));
+    -o-filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.5));
+    
+    transition: right 0.3s;
+    -webkit-transition: right 0.3s;
 }
 #mensaje::before{
     position: absolute;
@@ -490,7 +510,7 @@ html,body{
     background-image: url(../images/hojita.svg);
 }
 .mensaje_off{
-    right: -310px;
+    right: -260px;
 }
 .mensaje_on{
     right: 0px;
@@ -503,9 +523,9 @@ html,body{
     margin: 0px;
     box-sizing: border-box;
     font-family: 'Quicksand_Book';
-    font-size: 15px;
+    font-size: 16px;
     color: #FFFFFF;
-    text-align: left;
+    text-align: center;
     font-weight: normal;
     line-height: normal;
 }
