@@ -8,21 +8,12 @@
                                     supported by Chrome, Opera and Firefox */
 }
 
-html,body{
-    width: 845px;
-    height: 507px;
-    overflow: hidden;
-    box-sizing: border-box;
-    margin: 0px;
-    padding: 0px;
-}
-
 #container{
     width: 845px;
     height: 507px;
 
     position: relative;
-    border: rgba(0,0,0,0) solid 1px;
+    border: rgba(0,0,0,1) solid 1px;
     box-sizing: border-box;
     margin: 0px auto;
     padding: 0px;
@@ -304,7 +295,7 @@ html,body{
     visibility: hidden;
 }
 .residuo_tag_animate1{
-    top: 80px !important;
+    top: 100px !important;
     transition: top 0.25s ease-out, left 0.25s ease-out;
     -webkit-transition: top 0.25s ease-out, left 0.25s ease-out;
 }

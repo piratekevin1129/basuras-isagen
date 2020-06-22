@@ -4,6 +4,7 @@
         width: 845px;
         height: 507px;
         overflow: hidden;
+        box-sizing: border-box;
         margin: 0px;
         padding: 0px;
     }
@@ -12,14 +13,209 @@
 }
 
 @media (min-width: 710px) and (max-width: 844px){
-    /*html,body{
+    html,body{
         position: relative;
         width: 710px;
         height: 426px;
         overflow: hidden;
         margin: 0px;
         padding: 0px;
-    }*/
+        box-sizing: border-box;
+    }
+
+    #container{
+        width: 710px;
+        height: 426px;
+    }
+
+    .contenedor_canecas{
+        width: 500px;
+        height: 521px;
+        top: 30px;
+        left: 0px;
+    }
+    #contenedor_canecas_img{
+        background-image: url(../images/barras_2.png);
+    }
+    
+    #caneca_blanca,
+    #caneca_negra,
+    #caneca_verde,
+    #caneca_roja
+    {
+        width: 128px;
+        height: 286px;
+    }
+    
+    #caneca_blanca{
+        top: 165px;
+        left: 0px;
+    }
+    #caneca_negra{
+        top: 165px;
+        left: 121px;
+    }
+    #caneca_verde{
+        top: 165px;
+        left: 241px;
+    }
+    #caneca_roja{
+        top: 165px;
+        left: 370px;
+    }
+
+    #caneca_blanca_info{
+        top: 65px;
+        left: 35px;
+        width: 90px;
+    }
+    #caneca_negra_info{
+        top: 65px;
+        left: 132px;
+        width: 115px;
+    }
+    #caneca_verde_info{
+        top: 65px;
+        left: 249px;
+        width: 116px;
+    }
+    #caneca_roja_info{
+        top: 65px;
+        left: 375px;
+        width: 90px;
+    }
+
+    .caneca_info{
+        height: 100px;
+    }
+    
+    .caneca_info > div > p{
+        font-size: 10px;
+        line-height: normal;
+    }
+        
+    #scroll_basuras{
+        top: 0px;
+        right: 0px;
+        width: 200px;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+    }
+
+    .residuo_tag_animate1{
+        top: 60px !important;
+    }
+    .residuo_tag_animate2{
+        top: 300px !important;
+        transform: scale(0.4);
+        -webkit-transform: scale(0.4);
+        -o-transform: scale(0.4);
+    }
+
+    #basura_label{
+        width: auto;
+        max-width: 180px;
+        height: auto;
+        min-height: 15px;
+        padding: 5px 10px;
+        
+        font-size: 14px;
+    }
+
+    .iluminacion_caneca_1{
+        top: 46px;
+        left: 6px;
+    }
+    .iluminacion_caneca_2{
+        top: 45px;
+        left: 124px;
+    }
+    .iluminacion_caneca_3{
+        top: 45px;
+        left: 245px;
+    }
+    .iluminacion_caneca_4{
+        top: 45px;
+        left: 374px;
+    }
+
+    /**************OTRAS COSAS****************/
+    #instructivo{
+        position: absolute;
+        width: 350px;
+        padding: 10px;
+        top: 10px;
+    }
+    .instructivo_off{
+        left: -350px;
+    }
+    .instructivo_on{
+        left: 0px;
+    }
+    #instructivo_txt{
+        font-size: 15px;
+        line-height: normal;
+    }
+    #estrellas{
+        position: absolute;
+        top: 10px;
+        right: 200px;
+        width: 30px;
+        width: calc(30px * 5);
+        width: -moz-calc(30px * 5);
+        height: 30px;
+    }
+    #estrellas > div{
+        width: 25px;
+        height: 25px;
+        margin: 0px 2.5px;
+    }
+
+    #mensaje{
+        width: 270px;
+        margin: 0px;
+        height: auto;
+        padding: 10px;
+        top: 80%;
+    }
+    #mensaje::before{
+        
+    }
+    
+    #mensaje_txt{
+        font-size: 16px;
+        line-height: normal;
+    }
+    
+    /***********CARGADOR*************/
+    
+    #cargador_cont{
+        width: 90px;
+        height: 156px;
+        padding-top: 30px;
+        top: 50%;
+        top: calc(50% - 160px);
+        top: -moz-calc(50% - 160px);
+        left: 50%;
+        left: calc(50% - (90px / 2));
+        left: -moz-calc(50% - (90px / 2));
+    }
+    #cargador_cont > div{
+        width: 52px;
+        height: 24px;
+        margin: 0px auto;
+        margin-bottom: 5px;
+    }
+        
+    #cargador_txt{
+        font-size: 16px;
+        line-height: normal;
+        top: 50%;
+        top: calc(50% + 4px);
+        top: -moz-calc(50% + 4px);
+        left: 0px;
+    }
 
     
 }
@@ -49,100 +245,7 @@
         margin: 0px;
         padding: 0px;
     }
-    #container{
-        width: 100%;
-        height: 610px;
-    }
-
-    #logo1{
-        width: 107px;
-        width: calc(100% - (96px + 250px));
-        width: -moz-calc(100% - (96px + 250px));
-        min-width: 50px !important;
-        height: 50px;
-        top: 5px;
-        left: 0px;
-        background-position: center 0px;
-    }
-    #logo2{
-        width: 76px;
-        width: calc(100% - (127px + 250px));
-        width: -moz-calc(100% - (127px + 250px));
-        min-width: 50px !important;
-        height: 99px;
-        top: 0px;
-        left: initial !important;
-        right: 0px;
-        background-position: center 0px;
-    }
     
-    #title{
-        width: 230px;
-        height: 60px;
-        margin: 0px;
-        
-        margin-left: auto;
-        margin-right: auto;
-    
-        font-size: 18px;
-        line-height: 20px;
-        margin-top: 5px;
-    }
-    
-    #title span{
-        font-size: 24px;
-        margin-right: 8px;
-        margin-top: 2px;
-    }
-    
-    
-    #instrucciones{
-        z-index: 2100;
-        
-        width: 100%;
-        width: calc(100% - 130px);
-        width: -moz-calc(100% - 130px);
-        height: auto;
-        display: block;
-        
-        top: 18%;
-        padding: 10px 10px;
-        border-radius: 0px 5px 5px 0px;
-    }
-        
-    #instrucciones p{
-        font-size: 13px;
-    }
-    .instrucciones-on{
-        left: 0px;
-    }
-    .instrucciones-off{
-        left: -100%;
-    }
-    
-
-    #juego-cont{
-        height: 500px;
-    }
-    #fondo-cont{
-        position: absolute;
-        left: 0px;
-        background-position: 0px bottom;
-    }
-    #puntaje_cont{
-        width: 50px;
-        height: 54px;
-        top: 18%;
-        left: 0px;
-    }
-    #puntaje_txt{
-        width: 25px;
-        height: 25px;
-        
-        top: 2px;
-        left: 44%;
-        line-height: 25px;
-    }
 }
 
 @media (min-width: 280px) and (max-width: 359px){
