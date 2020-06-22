@@ -168,9 +168,15 @@ function printResiduos(){
         image_producto.style.width = residuo_info.width+'px'
         image_producto.style.height = residuo_info.height+'px'
         image_producto.style.backgroundImage = 'url(public/assets/basuras/'+residuo_info.src+'.png)'
-        image_producto.setAttribute('onmouseover',"overBasura(this,'"+id_name+"','"+residuo_info.nombre+"')")
-        image_producto.setAttribute('onmouseout',"outBasura('"+id_name+"','"+residuo_info.nombre+"')")
-        image_producto.setAttribute('onmousedown',"downBasura(event,"+residuo_info.id+","+cat+")")
+
+        if(ismobile){
+            image_producto.setAttribute('onclick',"clickBasura(event,'"+id_name+"',"+cat+","+id+")")
+        }else{
+            image_producto.setAttribute('onmouseover',"overBasura(this,'"+id_name+"','"+residuo_info.nombre+"')")
+            image_producto.setAttribute('onmouseout',"outBasura('"+id_name+"','"+residuo_info.nombre+"')")
+            image_producto.setAttribute('onmousedown',"downBasura(event,"+residuo_info.id+","+cat+")")
+        }
+        
         var image_borde = document.createElement('img')
         image_borde.src = 'public/assets/basuras/marcos/'+residuo_info.src+'.png'
         
@@ -182,6 +188,9 @@ function printResiduos(){
 
         getI('contenedor_basuras').appendChild(div_residuo)
     }
+    /*var clear_div = document.createElement('div')
+    clear_div.style.clear = 'both'
+    getI('contenedor_basuras').appendChild(clear_div)*/
 }
 
 function overBasura(img,id_name,label_name){
@@ -198,11 +207,26 @@ function overBasura(img,id_name,label_name){
     var height_label = label.offsetHeight
     var x_img = img.getBoundingClientRect().left
     var y_img = img.getBoundingClientRect().top
+    var w_img = img.getBoundingClientRect().width
     var h_img = img.getBoundingClientRect().height
     //console.log(x_img,y_img,h_img,"--",width_label,height_label)
 
-    var real_x = (x_img-(width_label + 20))
-    var real_y = ((y_img+(h_img/2))-(height_label / 2))
+    var real_x = 0
+    var real_y = 0
+    if(ismobile){
+        real_x = ((x_img+(w_img/2))-(width_label / 2))
+        if(real_x<0){
+            real_x = 0
+        }
+        if((real_x+width_label)>game_width){
+            real_x = game_width-width_label
+        }
+        real_y = (y_img + h_img + 10)
+    }else{
+        real_x = (x_img-(width_label + 20))
+        real_y = ((y_img+(h_img/2))-(height_label / 2))
+    }
+    
     label.style.left = real_x+'px'
     label.style.top = real_y+'px'
     
@@ -224,6 +248,86 @@ var residuo_tag_height = 0
 var iluminacion_caneca = getI('iluminacion_caneca')
 var residuo_actual = null
 var basura_clicked = null
+var basura_clicked_id = null//esta variable es para el responsive
+
+//////////////////FUNCIONES MOBILE//////////////////////
+function clickBasura(event,idname,cat,id){
+    if(!animating_depositar&&!game_finished){
+        click_mp3.play()
+        
+        var basura_cont = getI(idname)
+        basura_clicked = basura_cont
+        var marco = basura_cont.getElementsByClassName('basura_cont_marco')[0]
+        marco.style.opacity = 1
+
+        var residuo_info = findResiduoData(id,cat)
+
+        basura_clicked_id = {cat:cat,id:id}
+
+        residuo_actual = findResiduoData(id,cat)
+
+        var posx = event.pageX
+        var posy = event.pageY
+        console.log(posx,posy)
+
+        residuo_tag_width = residuo_actual.width
+        residuo_tag_height = residuo_actual.height
+
+        residuo_tag.style.width = residuo_actual.width+'px'
+        residuo_tag.style.height = residuo_actual.height+'px'
+        residuo_tag.style.backgroundImage = 'url(public/assets/basuras/'+residuo_actual.src+'.png)'
+        residuo_tag.style.left = (posx-(residuo_tag_width/2))+'px'
+        residuo_tag.style.top = (posy-(residuo_tag_height/2))+'px'
+        
+        setInstructivo({msg:'<span>'+residuo_actual.nombre+':</span><br />'+residuo_actual.descripcion})
+    }
+}
+
+function overCaneca(caneca,code){
+
+}
+function outCaneca(caneca,code){
+
+}
+
+
+function clickCaneca(caneca,code){
+    if(ismobile){
+        if(basura_clicked_id==null){
+            setMensaje({msg:'Debes seleccionar un residuo antes de seleccionar una categoría'})
+        }else{
+            unsetInstructivo()
+            var marco = basura_clicked.getElementsByClassName('basura_cont_marco')[0]
+            marco.style.opacity = 0
+
+            if(basura_clicked_id.cat==code){
+                //bien
+                var div_click_action = basura_clicked.getElementsByClassName('basura_cont_imagen')[0]
+                var img_click_action = div_click_action.getElementsByTagName('div')[0]
+                img_click_action.setAttribute('onclick','')
+                basura_clicked.classList.add('basura_cont_selected')
+
+                depositarBasura2(caneca)
+                correcto_mp3.play()
+            }else{
+                residuo_tag.className = 'residuo_tag_off'
+                
+                var estrella_mala = getI('estrellas').getElementsByTagName('div')[incorrectos]
+                estrella_mala.className = 'estrella_on'
+                
+                error_mp3.play()
+                incorrectos++
+                if(incorrectos==5){
+                    game_finished = true
+                    setMensaje({msg:'<span>Las oportunidades terminaron y el juego tambien</span>!!<br />Vuelve a intentarlo',close:false})
+                }else{
+                    setMensaje({msg:'Este residuo no pertenece a esta categoría'})
+                }
+            }
+
+        }
+    }
+}
 
 function downBasura(event,id,cat){
     if(!animating_depositar&&!game_finished){
@@ -410,6 +514,32 @@ function depositarBasura(){
             caneca_activa_ind = 0
             checkFinalizar()
             
+        },250)
+
+    },50)
+}
+
+function depositarBasura2(caneca){
+    correctos++
+    var rect_caneca = caneca.getBoundingClientRect()
+    var left_residuo = rect_caneca.left+((rect_caneca.width/2)-(residuo_tag_width/2))
+    animating_depositar = true
+    
+    animacion_depositar = setTimeout(function(){
+        residuo_tag.classList.add('residuo_tag_animate2')
+        residuo_tag.style.left = left_residuo+'px'
+        
+        clearTimeout(animacion_depositar)
+
+        animacion_depositar = setTimeout(function(){
+            clearTimeout(animacion_depositar)
+            animacion_depositar = null
+            residuo_tag.className = 'residuo_tag_off'
+            animating_depositar = false
+            
+            depositar_mp3.play()
+            caneca.className = 'caneca_deposita'
+            checkFinalizar()
         },250)
 
     },50)

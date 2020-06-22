@@ -48,10 +48,10 @@
     <div id="residuo_tag2" class="residuo_tag_off"></div>
 
     <div class="contenedor_canecas">
-        <div id="caneca_blanca"></div>
-        <div id="caneca_negra"></div>
-        <div id="caneca_verde"></div>
-        <div id="caneca_roja"></div>
+        <div id="caneca_blanca" onclick="clickCaneca(this,1)" onmouseover="overCaneca(this,1)" onmouseout="outCaneca(this,1)"></div>
+        <div id="caneca_negra" onclick="clickCaneca(this,2)" onmouseover="overCaneca(this,2)" onmouseout="outCaneca(this,2)"></div>
+        <div id="caneca_verde" onclick="clickCaneca(this,3)" onmouseover="overCaneca(this,3)" onmouseout="outCaneca(this,3)"></div>
+        <div id="caneca_roja" onclick="clickCaneca(this,4)" onmouseover="overCaneca(this,4)" onmouseout="outCaneca(this,4)"></div>
 
         <!--<div id="tapa_caneca_blanca" class="spd_sprite" width="95" height="32" frames="11" src="public/assets/media/tapa_caneca_blanca.png"></div>
         <div id="tapa_caneca_negra" class="spd_sprite" width="101" height="32" frames="11" src="public/assets/media/tapa_caneca_negra.png"></div>
@@ -103,9 +103,11 @@
 <script src="public/assets/js/main.js"></script>
 <script src="public/assets/js/cargador.js"></script>
 <script src="public/assets/js/scorm.js"></script>
+<script src="public/assets/js/mobile.js"></script>
 <script src="public/data.js"></script>
 
 <script>
+    prepareWindow()
 
     setCargador()
     loadResiduos()
@@ -160,7 +162,11 @@
             loadAudio({src:'public/assets/media/tapa_open.mp3',callBack:function(data){
                 tapa_mp3 = data
                 setCargadorText2()
-                spdPlayAnimation({frame:1,stop:0,loop:true},0)
+                if(ismobile){
+
+                }else{
+                    spdPlayAnimation({frame:1,stop:0,loop:true},0)
+                }                
                 loadResiduo(0)
 
 

@@ -221,17 +221,239 @@
 }
 
 @media (min-width: 530px) and (max-width: 709px){
-    /*html,body{
+    html,body{
         position: relative;
         width: 530px;
-        height: 318px;
+        height: 600px;
         overflow: hidden;
         margin: 0px;
         padding: 0px;
+        box-sizing: border-box;
     }
-    #cargador p{
-        top: 60% !important;
-    }*/
+
+    #container{
+        width: 530px;
+        height: 600px;
+    }
+
+    #fondo{
+        background-image: url(../images/fondo_responsive.png);
+        background-position: 0px bottom;
+    }
+
+    .contenedor_canecas{
+        width: 500px;
+        height: 521px;
+        top: 230px;
+        left: 5px;
+    }
+    #contenedor_canecas_img{
+        background-image: url(../images/barras_2.png);
+    }
+    
+    #caneca_blanca,
+    #caneca_negra,
+    #caneca_verde,
+    #caneca_roja
+    {
+        width: 128px;
+        height: 286px;
+        cursor: pointer;
+    }
+    
+    #caneca_blanca{
+        top: 165px;
+        left: 0px;
+    }
+    #caneca_negra{
+        top: 165px;
+        left: 121px;
+    }
+    #caneca_verde{
+        top: 165px;
+        left: 241px;
+    }
+    #caneca_roja{
+        top: 165px;
+        left: 370px;
+    }
+
+    #caneca_blanca_info{
+        top: 65px;
+        left: 35px;
+        width: 90px;
+    }
+    #caneca_negra_info{
+        top: 65px;
+        left: 132px;
+        width: 115px;
+    }
+    #caneca_verde_info{
+        top: 65px;
+        left: 249px;
+        width: 116px;
+    }
+    #caneca_roja_info{
+        top: 65px;
+        left: 375px;
+        width: 90px;
+    }
+
+    .caneca_info{
+        height: 100px;
+    }
+    
+    .caneca_info > div > p{
+        font-size: 10px;
+        line-height: normal;
+    }
+        
+    #scroll_basuras{
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 200px;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    #contenedor_basuras{
+        width: auto;
+        white-space: nowrap;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+
+    .basura_cont{
+        display: inline-block;
+        width: auto;
+        height: 100%;
+        margin: 0px 10px;
+        vertical-align: top;
+        /*border: #000 solid 1px;*/
+    }
+    .basura_cont_marco{
+        width: auto;
+        height: 100%;
+    }
+    .basura_cont_imagen div{
+        cursor: pointer;
+    }
+    #residuo_tag,#residuo_tag2{
+        cursor: default;
+    }
+
+    .residuo_tag_animate2{
+        top: 80% !important;
+    }
+    
+    #basura_label{
+        width: auto;
+        max-width: 180px;
+        height: auto;
+        min-height: 15px;
+        padding: 5px 10px;
+        
+        font-size: 14px;
+    }
+
+    .iluminacion_caneca_1{
+        top: 46px;
+        left: 6px;
+    }
+    .iluminacion_caneca_2{
+        top: 45px;
+        left: 124px;
+    }
+    .iluminacion_caneca_3{
+        top: 45px;
+        left: 245px;
+    }
+    .iluminacion_caneca_4{
+        top: 45px;
+        left: 374px;
+    }
+
+    /**************OTRAS COSAS****************/
+    #instructivo{
+        position: absolute;
+        width: 480px;
+        padding: 10px;
+        top: 200px;
+    }
+    .instructivo_off{
+        left: -480px;
+    }
+    .instructivo_on{
+        left: 0px;
+    }
+    #instructivo_txt{
+        font-size: 14px;
+        line-height: normal;
+    }
+    #estrellas{
+        position: absolute;
+        top: 200px;
+        right: 5px;
+        width: 25px;
+        
+        height: 30px;
+        height: calc(30px * 5);
+        height: -moz-calc(30px * 5);
+    }
+    #estrellas > div{
+        float: none;
+        width: 25px;
+        height: 25px;
+        margin: 2.5px 0px;
+    }
+
+    #mensaje{
+        width: 270px;
+        margin: 0px;
+        height: auto;
+        padding: 10px;
+        top: 85%;
+    }
+    #mensaje::before{
+        display: none;
+    }
+    
+    #mensaje_txt{
+        font-size: 15px;
+        line-height: normal;
+    }
+    
+    /***********CARGADOR*************/
+    
+    #cargador_cont{
+        width: 90px;
+        height: 156px;
+        padding-top: 30px;
+        top: 50%;
+        top: calc(50% - 160px);
+        top: -moz-calc(50% - 160px);
+        left: 50%;
+        left: calc(50% - (90px / 2));
+        left: -moz-calc(50% - (90px / 2));
+    }
+    #cargador_cont > div{
+        width: 52px;
+        height: 24px;
+        margin: 0px auto;
+        margin-bottom: 5px;
+    }
+        
+    #cargador_txt{
+        font-size: 16px;
+        line-height: normal;
+        top: 50%;
+        top: calc(50% + 4px);
+        top: -moz-calc(50% + 4px);
+        left: 0px;
+    }
+
+   
 
 }
 

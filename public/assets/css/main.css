@@ -304,14 +304,19 @@
     transform: scale(0.5);
     -webkit-transform: scale(0.5);
     -o-transform: scale(0.5);
-    transition: top 0.3s ease-in, left 0.3s ease-in, transform 0.3s ease-in, -webkit-transform 0.3s ease-in, -o-transform 0.3s ease-in;
-    -webkit-transition: top 0.3s ease-in, left 0.3s ease-in, transform 0.3s ease-in, -webkit-transform 0.3s ease-in, -o-transform 0.3s ease-in;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    -o-filter: blur(5px);
+
+    transition: top 0.3s ease-in, left 0.3s ease-in, transform 0.3s ease-in, -webkit-transform 0.3s ease-in, -o-transform 0.3s ease-in, filter 0.3s ease-in, -webkit-filter 0.3s ease-in, -o-filter 0.3s ease-in;
+    -webkit-transition: top 0.3s ease-in, left 0.3s ease-in, transform 0.3s ease-in, -webkit-transform 0.3s ease-in, -o-transform 0.3s ease-in, filter 0.3s ease-in, -webkit-filter 0.3s ease-in, -o-filter 0.3s ease-in;
 }
 
 #basura_label{
     position: absolute;
     width: auto;
     max-width: 200px;
+    min-width: 150px;
     height: auto;
     min-height: 20px;
     padding: 5px 15px;
