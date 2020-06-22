@@ -95,6 +95,10 @@ function loadResiduos(){
     }
 }
 
+function repeatUnderground(){
+    getI('underground_mp3').play()
+}
+
 function loadResiduo(r){
     if(r==residuos.length){
         printResiduos()
@@ -102,7 +106,11 @@ function loadResiduo(r){
 
         setCargadorText('Haz click para comenzar')
         cargador.onclick = function(){
+            getI('underground_mp3').play()
+            setMensaje({msg:'Deposita en las canecas los residuos que correspondan <span>según su tipo</span>'})
             unsetCargador()
+
+            iniciarReloj()
         }
         
     }else{
@@ -177,6 +185,7 @@ function printResiduos(){
 }
 
 function overBasura(img,id_name,label_name){
+    over_mp3.currentTime = 0
     over_mp3.play()
     var basura_cont = getI(id_name)
     var marco = basura_cont.getElementsByClassName('basura_cont_marco')[0]
@@ -393,8 +402,7 @@ function depositarBasura(){
 
                 animating_depositar = false
                 residuo_tag2.className = 'residuo_tag_off'
-                setMensaje({msg:'¡Muy bien!<br /> Continúa asi'})
-            },250)
+            },300)
             
             depositar_mp3.play()
             caneca_activa.className = 'caneca_deposita'
@@ -411,12 +419,12 @@ function checkFinalizar(){
     if(correctos==residuos.length){
         finish_mp3.play()
         game_finished = true
-        setMensaje({msg:'<span>¡Excelente!</span><br />Has completado la actividad'})
+        setMensaje({msg:'<span>¡Excelente!</span><br />Has completado la actividad',close:false})
+        pararReloj()
+        guardarScorm(true)
+    }else{
+        setMensaje({msg:'¡Muy bien!<br /> Continúa asi'})
     }
-}
-
-function startGame(){
-
 }
 
 /////////////////INSTRUCTIVO//////////////

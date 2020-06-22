@@ -52,8 +52,7 @@ function getScorm(){
 		console.log("no definida suspend data")
 	}
 
-	tiempo_anterior_txt.innerHTML = 'Mejor puntaje - '+tiempo_anterior
-    //intentos_txt.innerHTML = 'Intento #'+total_attemps
+   //intentos_txt.innerHTML = 'Intento #'+total_attemps
     console.log('Intento #'+total_attemps)
 	startGame()
 }
@@ -89,7 +88,7 @@ function guardarScorm(finish){
 }
 
 function prepareSaveScorm(){
-	tiempos.push({seg:time_scorm,score:0})
+	tiempos.push({seg:getRelojTime(),score:(5-incorrectos)})
 	var preparar_data = {
 		tiempos:tiempos,
         total_attemps:total_attemps,

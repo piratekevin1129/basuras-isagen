@@ -168,6 +168,18 @@ var residuos_data = [
                 nombre:'Empaque de pintura',
                 descripcion:'Todos los envases que contuvieron sustancias químicas peligrosas, también se consideran peligrosos. Las pinturas (base de aceite) son altamente contaminantes del agua y del suelo, y las pinturas a base de agua tienen varios colorantes que afectan el agua.',
                 img:'empaque_pintura'
+            },
+            {
+                id:7,
+                nombre:'Envases de cosméticos para el cabello',
+                descripcion:'Todos los envases que contuvieron sustancias químicas peligrosas, también se consideran peligrosos. Los cosméticos son contaminantes del agua y del suelo',
+                img:'envases_cosmeticos_cabellos'
+            },
+            {
+                id:8,
+                nombre:'Envases de antipulgas, garrapatas',
+                descripcion:'Todos los envases que contuvieron sustancias químicas peligrosas, también se consideran peligrosos. Los antipulgas y garrapatas contienen venenos o elementos tóxicos',
+                img:'envases_antipulgas_garrapatas'
             }
         ]
     }

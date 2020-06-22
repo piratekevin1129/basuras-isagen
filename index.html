@@ -91,6 +91,9 @@
         </div>
         <div id="cargador_txt"></div>
     </div>
+    <audio id="underground_mp3" onended="repeatUnderground()">
+        <source src="public/assets/media/electronic_lizard_uplifting_light.mp3" type="audio/mp3">
+    </audio>
 </div>
 
 <script src="public/spider/sprites/sprite.js"></script>
@@ -98,6 +101,7 @@
 <script src="public/assets/js/jquery-3.5.0.min.js"></script>
 <script src="public/assets/js/main.js"></script>
 <script src="public/assets/js/cargador.js"></script>
+<script src="public/assets/js/scorm.js"></script>
 <script src="public/data.js"></script>
 
 <script>
@@ -117,6 +121,10 @@
     var tapa_mp3 = null
     
     window.onload = function(){
+        initScorm()
+    }
+
+    function startGame(){
         /*spdLoadSprite({idname:'tapa_caneca_blanca',autoplay:'off',callBack:function(){
         spdLoadSprite({idname:'tapa_caneca_negra',autoplay:'off',callBack:function(){
         spdLoadSprite({idname:'tapa_caneca_verde',autoplay:'off',callBack:function(){
@@ -167,7 +175,6 @@
         }})
         }})
         }})*/
-        
     }
 
 </script>
