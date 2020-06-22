@@ -4,9 +4,8 @@ var limit_score = 100
 var total_attemps = 1
 var tiempo_anterior = 0//en segundos
 var tiempos = []
-var name_game = 'Globos'
+var name_game = 'Residuos'
 
-var tiempo_anterior_txt = document.getElementById('tiempo-msg-relojito-record')
 //var intentos_txt = document.getElementById('intentos-txt')
 
 function initScorm(){
@@ -44,24 +43,11 @@ function getScorm(){
 		data_scorm = suspend_parsed
 		total_attemps = data_scorm.total_attemps
 		total_attemps++
-		//
+		
         tiempos = data_scorm.tiempos
-        //verificar mejor puntaje
-		var mejor = 0
-		var menor = -1
-		if(tiempos.length>0){
-			mejor = tiempos[0].scor 
-			menor = 0
-			for(var m = 0;m<tiempos.length;m++){
-				if(tiempos[m].scor>mejor){
-					mejor = tiempos[m].scor
-					menor = m
-				}
-			}
-		} 
-        if(menor!=-1){
-            tiempo_anterior = tiempos[menor].scor
-        }
+        console.log("---tiempos---")
+        console.log(tiempos)
+        		
 	}else{
 		console.log("no definida suspend data")
 	}
@@ -103,7 +89,7 @@ function guardarScorm(finish){
 }
 
 function prepareSaveScorm(){
-	tiempos.push({seg:segundos,txt:renderTime(),scor:puntos})
+	tiempos.push({seg:time_scorm,score:0})
 	var preparar_data = {
 		tiempos:tiempos,
         total_attemps:total_attemps,
@@ -155,4 +141,19 @@ function getTimeText(secs){
     }
 
     return horas_txt+':'+minutos_txt+':'+segundos_txt
+}
+
+var time_scorm = 0
+var animacion_reloj = null
+function iniciarReloj(){
+	animacion_reloj = setInterval(animacionReloj,1000)
+}
+function pararReloj(){
+	clearInterval(animacion_reloj)
+}
+function animacionReloj(){
+	time_scorm+=1
+}
+function getRelojTime(){
+	return time_scorm
 }
