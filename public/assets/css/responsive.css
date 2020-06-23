@@ -582,8 +582,13 @@
     }
 
     .caneca_info{
-        height: 90px;
-        align-items: end;
+        height: 80px;
+        display: block;
+    }
+    .caneca_info > div{
+        top: 100%;
+        top: calc(100% - 15px);
+        top: -moz-calc(100% - 15px);
     }
     
     .caneca_info > div > p{
@@ -668,6 +673,7 @@
     #instructivo_txt{
         font-size: 14px;
         line-height: normal;
+        text-align: center;
     }
     #estrellas{
         position: absolute;
@@ -699,6 +705,7 @@
     #mensaje_txt{
         font-size: 13px;
         line-height: normal;
+        text-align: center;
     }
     .mensaje_off{
         right: -100%;
