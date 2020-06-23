@@ -13,7 +13,7 @@
     height: 507px;
 
     position: relative;
-    border: rgba(0,0,0,1) solid 1px;
+    border: rgba(0,0,0,0) solid 1px;
     box-sizing: border-box;
     margin: 0px auto;
     padding: 0px;
@@ -47,6 +47,9 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url(../images/barras.png);
+}
+.contenedor_canecas_image{
+    display: none;
 }
 #caneca_blanca,
 #caneca_negra,
@@ -298,18 +301,6 @@
     top: 100px !important;
     transition: top 0.25s ease-out, left 0.25s ease-out;
     -webkit-transition: top 0.25s ease-out, left 0.25s ease-out;
-}
-.residuo_tag_animate2{
-    top: 300px !important;
-    transform: scale(0.5);
-    -webkit-transform: scale(0.5);
-    -o-transform: scale(0.5);
-    filter: blur(5px);
-    -webkit-filter: blur(5px);
-    -o-filter: blur(5px);
-
-    transition: top 0.3s ease-in, left 0.3s ease-in, transform 0.3s ease-in, -webkit-transform 0.3s ease-in, -o-transform 0.3s ease-in, filter 0.3s ease-in, -webkit-filter 0.3s ease-in, -o-filter 0.3s ease-in;
-    -webkit-transition: top 0.3s ease-in, left 0.3s ease-in, transform 0.3s ease-in, -webkit-transform 0.3s ease-in, -o-transform 0.3s ease-in, filter 0.3s ease-in, -webkit-filter 0.3s ease-in, -o-filter 0.3s ease-in;
 }
 
 #basura_label{

@@ -107,7 +107,12 @@ function loadResiduo(r){
         setCargadorText('Haz click para comenzar')
         cargador.onclick = function(){
             getI('underground_mp3').play()
-            setMensaje({msg:'Deposita en las canecas los residuos que correspondan <span>según su tipo</span>'})
+            if(ismobile){
+                setMensaje({msg:'Toca un residuo y luego toca la <span>caneca</span> correspondiente'})
+            }else{
+                setMensaje({msg:'Deposita en las canecas los residuos que correspondan <span>según su tipo</span>'})
+            }
+            
             unsetCargador()
 
             iniciarReloj()
@@ -253,6 +258,12 @@ var basura_clicked_id = null//esta variable es para el responsive
 //////////////////FUNCIONES MOBILE//////////////////////
 function clickBasura(event,idname,cat,id){
     if(!animating_depositar&&!game_finished){
+        if(basura_clicked_id!=null){
+            var marco = basura_clicked.getElementsByClassName('basura_cont_marco')[0]
+            marco.style.opacity = 0
+            basura_clicked_id = null
+            basura_clicked = null
+        }
         click_mp3.play()
         
         var basura_cont = getI(idname)
@@ -290,7 +301,6 @@ function outCaneca(caneca,code){
 
 }
 
-
 function clickCaneca(caneca,code){
     if(ismobile){
         if(basura_clicked_id==null){
@@ -311,6 +321,8 @@ function clickCaneca(caneca,code){
                 correcto_mp3.play()
             }else{
                 residuo_tag.className = 'residuo_tag_off'
+                basura_clicked_id = null
+                basura_clicked = null
                 
                 var estrella_mala = getI('estrellas').getElementsByTagName('div')[incorrectos]
                 estrella_mala.className = 'estrella_on'
@@ -319,7 +331,7 @@ function clickCaneca(caneca,code){
                 incorrectos++
                 if(incorrectos==5){
                     game_finished = true
-                    setMensaje({msg:'<span>Las oportunidades terminaron y el juego tambien</span>!!<br />Vuelve a intentarlo',close:false})
+                    setMensaje({msg:'<span>Las oportunidades terminaron y el juego tambien</span> !!Vuelve a intentarlo',close:false})
                 }else{
                     setMensaje({msg:'Este residuo no pertenece a esta categoría'})
                 }
@@ -467,7 +479,7 @@ function upBasura(event){
             incorrectos++
             if(incorrectos==5){
                 game_finished = true
-                setMensaje({msg:'<span>Las oportunidades terminaron y el juego tambien</span>!!<br />Vuelve a intentarlo',close:false})
+                setMensaje({msg:'<span>Las oportunidades terminaron y el juego tambien</span> !!Vuelve a intentarlo',close:false})
             }else{
                 setMensaje({msg:'Este residuo no pertenece a esta categoría'})
             }
@@ -526,11 +538,11 @@ function depositarBasura2(caneca){
     animating_depositar = true
     
     animacion_depositar = setTimeout(function(){
+        clearTimeout(animacion_depositar)
+        residuo_tag.className = 'residuo_tag_on'
         residuo_tag.classList.add('residuo_tag_animate2')
         residuo_tag.style.left = left_residuo+'px'
         
-        clearTimeout(animacion_depositar)
-
         animacion_depositar = setTimeout(function(){
             clearTimeout(animacion_depositar)
             animacion_depositar = null
@@ -539,6 +551,8 @@ function depositarBasura2(caneca){
             
             depositar_mp3.play()
             caneca.className = 'caneca_deposita'
+            basura_clicked_id = null
+            basura_clicked = null
             checkFinalizar()
         },250)
 
@@ -549,11 +563,11 @@ function checkFinalizar(){
     if(correctos==residuos.length){
         finish_mp3.play()
         game_finished = true
-        setMensaje({msg:'<span>¡Excelente!</span><br />Has completado la actividad',close:false})
+        setMensaje({msg:'<span>¡Excelente!</span> Has completado la actividad',close:false})
         pararReloj()
         guardarScorm(true)
     }else{
-        setMensaje({msg:'¡Muy bien!<br /> Continúa asi'})
+        setMensaje({msg:'¡Muy bien! Continúa asi'})
     }
 }
 
@@ -613,7 +627,7 @@ function setMensaje(data){
                 animacion_mensaje = null
                 mensaje.className = 'mensaje_off'
                 mensaje_state = 'off'
-            },3000)
+            },4000)
         }
         
     }else{
@@ -634,7 +648,7 @@ function setMensaje(data){
                     animacion_mensaje = null
                     mensaje.className = 'mensaje_off'
                     mensaje_state = 'off'
-                },3000)
+                },4000)
             }
         },300)
     }

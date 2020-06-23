@@ -9,7 +9,18 @@
         padding: 0px;
     }
 
-    
+    .residuo_tag_animate2{
+        top: 300px !important;
+        transform: scale(0.5);
+        -webkit-transform: scale(0.5);
+        -o-transform: scale(0.5);
+        filter: blur(5px);
+        -webkit-filter: blur(5px);
+        -o-filter: blur(5px);
+
+        transition: top 0.3s ease-in, left 0.3s ease-in, transform 0.3s ease-in, -webkit-transform 0.3s ease-in, -o-transform 0.3s ease-in, filter 0.3s ease-in, -webkit-filter 0.3s ease-in, -o-filter 0.3s ease-in;
+        -webkit-transition: top 0.3s ease-in, left 0.3s ease-in, transform 0.3s ease-in, -webkit-transform 0.3s ease-in, -o-transform 0.3s ease-in, filter 0.3s ease-in, -webkit-filter 0.3s ease-in, -o-filter 0.3s ease-in;
+    }
 }
 
 @media (min-width: 710px) and (max-width: 844px){
@@ -92,6 +103,19 @@
     .caneca_info > div > p{
         font-size: 10px;
         line-height: normal;
+    }
+
+    .residuo_tag_animate2{
+        top: 300px !important;
+        transform: scale(0.5);
+        -webkit-transform: scale(0.5);
+        -o-transform: scale(0.5);
+        filter: blur(5px);
+        -webkit-filter: blur(5px);
+        -o-filter: blur(5px);
+
+        transition: top 0.3s ease-in, left 0.3s ease-in, transform 0.3s ease-in, -webkit-transform 0.3s ease-in, -o-transform 0.3s ease-in, filter 0.3s ease-in, -webkit-filter 0.3s ease-in, -o-filter 0.3s ease-in;
+        -webkit-transition: top 0.3s ease-in, left 0.3s ease-in, transform 0.3s ease-in, -webkit-transform 0.3s ease-in, -o-transform 0.3s ease-in, filter 0.3s ease-in, -webkit-filter 0.3s ease-in, -o-filter 0.3s ease-in;
     }
         
     #scroll_basuras{
@@ -216,8 +240,6 @@
         top: -moz-calc(50% + 4px);
         left: 0px;
     }
-
-    
 }
 
 @media (min-width: 530px) and (max-width: 709px){
@@ -258,7 +280,6 @@
     {
         width: 128px;
         height: 286px;
-        cursor: pointer;
     }
     
     #caneca_blanca{
@@ -307,6 +328,13 @@
         font-size: 10px;
         line-height: normal;
     }
+
+    .caneca_deposita{
+        animation: none;
+        animation: unset;
+        -webkit-animation: none;
+        -webkit-animation: unset;
+    }
         
     #scroll_basuras{
         top: 0px;
@@ -336,15 +364,19 @@
         width: auto;
         height: 100%;
     }
-    .basura_cont_imagen div{
-        cursor: pointer;
-    }
+    
     #residuo_tag,#residuo_tag2{
         cursor: default;
     }
 
     .residuo_tag_animate2{
-        top: 80% !important;
+        top: 400px !important;
+        transform: scale(0.5);
+        -webkit-transform: scale(0.5);
+        -o-transform: scale(0.5);
+        
+        transition: top 0.3s ease-in, left 0.3s ease-in, transform 0.3s ease-in, -webkit-transform 0.3s ease-in, -o-transform 0.3s ease-in;
+        -webkit-transition: top 0.3s ease-in, left 0.3s ease-in, transform 0.3s ease-in, -webkit-transform 0.3s ease-in, -o-transform 0.3s ease-in;
     }
     
     #basura_label{
@@ -357,21 +389,8 @@
         font-size: 14px;
     }
 
-    .iluminacion_caneca_1{
-        top: 46px;
-        left: 6px;
-    }
-    .iluminacion_caneca_2{
-        top: 45px;
-        left: 124px;
-    }
-    .iluminacion_caneca_3{
-        top: 45px;
-        left: 245px;
-    }
-    .iluminacion_caneca_4{
-        top: 45px;
-        left: 374px;
+    #iluminacion_caneca{
+        display: none;
     }
 
     /**************OTRAS COSAS****************/
@@ -453,21 +472,278 @@
         left: 0px;
     }
 
-   
-
+    .cargador_on{
+        transition: none;
+        -webkit-transition: none;
+    }
+    .cargador_off{
+        transition: none;
+        -webkit-transition: none;
+    }
 }
 
 @media (min-width: 280px) and (max-width: 529px){
     html,body{
         position: relative;
         width: 100%;
-        height: 610px;
-        overflow-x: hidden !important;
-        overflow-y: auto !important;
+        height: 700px;
+        overflow: hidden;
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+    }
+
+    #container{
+        width: 100%;
+        height: 700px;
+    }
+
+    #fondo{
+        background-size: 100% auto
+        background-image: url(../images/fondo_responsive.png);
+        background-position: 0px bottom;
+    }
+
+    .contenedor_canecas{
+        width: 100%;
+        height: 430px;
+        top: 290px;
+        left: 0px;
+    }
+    .contenedor_canecas_image{
+        display: block;
+        width: 100%;
+        position: relative;
+    }
+    .contenedor_canecas_image img{
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+    #contenedor_canecas_img{
+        background-image: none;
+    }
+    #contenedor_canecas_img::before{
+        position: absolute;
+        content: "";
+        width: 47px;
+        height: 69px;
+        top: -60px;
+        left: 0px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: 0px;
+        background-image: url(../images/hojita.svg);
+    }
+    
+    #caneca_blanca,
+    #caneca_negra,
+    #caneca_verde,
+    #caneca_roja
+    {
+        top: 0px;
+        width: 25%;
+        height: 100%;
+        background-position: center 120px;
+    }
+    
+    #caneca_blanca{
+        left: 0%;
+    }
+    #caneca_negra{
+        left: 25%;
+    }
+    #caneca_verde{
+        left: 50%;
+    }
+    #caneca_roja{
+        left: 75%;
+    }
+
+    #caneca_blanca_info{
+        top: 0px;
+        left: 0%;
+        width: 25%;
+    }
+    #caneca_negra_info{
+        top: 0px;
+        left: 25%;
+        width: 25%;
+    }
+    #caneca_verde_info{
+        top: 0px;
+        left: 50%;
+        width: 25%;
+    }
+    #caneca_roja_info{
+        top: 0px;
+        left: 75%;
+        width: 25%;
+    }
+
+    .caneca_info{
+        height: 90px;
+        align-items: end;
+    }
+    
+    .caneca_info > div > p{
+        font-size: 9px;
+        line-height: normal;
+    }
+    .caneca_info > div > p:last-child{
+        display: none;
+    }
+
+    .caneca_deposita{
+        animation: none;
+        animation: unset;
+        -webkit-animation: none;
+        -webkit-animation: unset;
+    }
+        
+    #scroll_basuras{
+        top: 30px;
+        left: 0px;
+        width: 100%;
+        height: 160px;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+    #contenedor_basuras{
+        width: auto;
+        white-space: nowrap;
+        height: 100%;
         margin: 0px;
         padding: 0px;
     }
+
+    .basura_cont{
+        display: inline-block;
+        width: auto;
+        height: 100%;
+        margin: 0px 10px;
+        vertical-align: top;
+        /*border: #000 solid 1px;*/
+    }
+    .basura_cont_marco{
+        width: auto;
+        height: 100%;
+    }
     
+    #residuo_tag,#residuo_tag2{
+        cursor: default;
+    }
+
+    .residuo_tag_animate2{
+        visibility: hidden !important;   
+    }
+    
+    #basura_label{
+        width: auto;
+        max-width: 180px;
+        height: auto;
+        min-height: 15px;
+        padding: 5px 10px;
+        
+        font-size: 14px;
+    }
+
+    #iluminacion_caneca{
+        display: none;
+    }
+
+    /**************OTRAS COSAS****************/
+    #instructivo{
+        position: absolute;
+        width: 100%;
+        padding: 10px;
+        top: 230px;
+    }
+    .instructivo_off{
+        left: -100%;
+    }
+    .instructivo_on{
+        left: 0px;
+    }
+    #instructivo_txt{
+        font-size: 14px;
+        line-height: normal;
+    }
+    #estrellas{
+        position: absolute;
+        top: 0px;
+        right: 5px;
+        height: 25px;
+        
+        width: 30px;
+        width: calc(30px * 5);
+        width: -moz-calc(30px * 5);
+    }
+    #estrellas > div{
+        width: 25px;
+        height: 25px;
+        margin: 0px 2.5px;
+    }
+
+    #mensaje{
+        width: 100%;
+        margin: 0px;
+        height: auto;
+        padding: 10px;
+        top: 190px;
+    }
+    #mensaje::before{
+        display: none;
+    }
+    
+    #mensaje_txt{
+        font-size: 13px;
+        line-height: normal;
+    }
+    .mensaje_off{
+        right: -100%;
+    }
+    .mensaje_on{
+        right: 0px;
+    }
+    
+    /***********CARGADOR*************/
+    
+    #cargador_cont{
+        width: 90px;
+        height: 156px;
+        padding-top: 30px;
+        top: 50%;
+        top: calc(50% - 160px);
+        top: -moz-calc(50% - 160px);
+        left: 50%;
+        left: calc(50% - (90px / 2));
+        left: -moz-calc(50% - (90px / 2));
+    }
+    #cargador_cont > div{
+        width: 52px;
+        height: 24px;
+        margin: 0px auto;
+        margin-bottom: 5px;
+    }
+        
+    #cargador_txt{
+        font-size: 16px;
+        line-height: normal;
+        top: 50%;
+        top: calc(50% + 4px);
+        top: -moz-calc(50% + 4px);
+        left: 0px;
+    }
+
+    .cargador_on{
+        transition: none;
+        -webkit-transition: none;
+    }
+    .cargador_off{
+        transition: none;
+        -webkit-transition: none;
+    }
 }
 
 @media (min-width: 280px) and (max-width: 359px){
