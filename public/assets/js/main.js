@@ -96,7 +96,7 @@ function loadResiduos(){
 }
 
 function repeatUnderground(){
-    getI('underground_mp3').play()
+    underground_mp3.play()
 }
 
 function loadResiduo(r){
@@ -104,17 +104,24 @@ function loadResiduo(r){
         printResiduos()
         fillCargador()
 
-        setCargadorText('Haz click para comenzar')
-        cargador.onclick = function(){
-            getI('underground_mp3').play()
-            
-            mensaje.classList.remove('mensaje_on_mobile')
-            unsetMensaje(3000)
+        if(game_reloading){
+            underground_mp3.play()
             unsetCargador()
 
+            game_reloading = false
             iniciarReloj()
+        }else{
+            setCargadorText('Haz click para comenzar')
+            cargador.onclick = function(){
+                underground_mp3.play()
+                
+                mensaje.classList.remove('mensaje_on_mobile')
+                unsetMensaje(3000)
+                unsetCargador()
+
+                iniciarReloj()
+            }
         }
-        
     }else{
         var image = new Image()
         image.onload = function(){
@@ -328,7 +335,7 @@ function clickCaneca(caneca,code){
                 incorrectos++
                 if(incorrectos==5){
                     game_finished = true
-                    setMensaje({msg:'<span>Las oportunidades terminaron y el juego tambien</span> !!Vuelve a intentarlo',close:false})
+                    setInstructivo({msg:'<span>¡Lo siento!</span> Las oportunidades terminaron y el juego también <span>!Vuelve a intentarlo!</span>',clase:'mensaje_azul',close:false})
                 }else{
                     setInstructivo({msg:'<span>¡Lo siento!</span> Este residuo no pertenece a esta categoría. Vuelve a intentarlo',clase:'mensaje_azul'})
                 }
@@ -476,7 +483,7 @@ function upBasura(event){
             incorrectos++
             if(incorrectos==5){
                 game_finished = true
-                setMensaje({msg:'<span>Las oportunidades terminaron y el juego tambien</span> !!Vuelve a intentarlo',close:false})
+                setInstructivo({msg:'<span>¡Lo siento!</span> Las oportunidades terminaron y el juego también <span>!Vuelve a intentarlo!</span>',clase:'mensaje_azul',close:false})
             }else{
                 setInstructivo({msg:'<span>¡Lo siento!</span> Este residuo no pertenece a esta categoría. Vuelve a intentarlo',clase:'mensaje_azul'})
             }
@@ -560,7 +567,7 @@ function checkFinalizar(){
     if(correctos==residuos.length){
         finish_mp3.play()
         game_finished = true
-        setMensaje({msg:'<span>¡Excelente!</span> Has completado la actividad',close:false})
+        setInstructivo({msg:'<span>¡Excelente!</span> vemos que todos los conceptos han quedado claros. Felicitaciones',close:false})
         pararReloj()
         guardarScorm(true)
     }else{
@@ -585,13 +592,18 @@ function setInstructivo(data){
         if(data.clase!=null&&data.clase!=undefined){
             instructivo.classList.add(data.clase)
         }
-        animacion_instructivo = setTimeout(function(){
-            clearTimeout(animacion_instructivo)
-            animacion_instructivo = null
-            instructivo.classList.remove('instructivo_on')
-            instructivo.classList.add('instructivo_off')
-            instructivo_state = 'off'
-        },3000)
+        if(data.close!=null&&data.close!=undefined){
+
+        }else{
+            animacion_instructivo = setTimeout(function(){
+                clearTimeout(animacion_instructivo)
+                animacion_instructivo = null
+                instructivo.classList.remove('instructivo_on')
+                instructivo.classList.add('instructivo_off')
+                instructivo_state = 'off'
+            },3000)
+        }
+        
     }else{
         instructivo.classList.remove('instructivo_on')
         instructivo.classList.add('instructivo_off')
@@ -604,13 +616,17 @@ function setInstructivo(data){
             if(data.clase!=null&&data.clase!=undefined){
                 instructivo.classList.add(data.clase)
             }
-            animacion_instructivo = setTimeout(function(){
-                clearTimeout(animacion_instructivo)
-                animacion_instructivo = null
-                instructivo.classList.remove('instructivo_on')
-                instructivo.classList.add('instructivo_off')
-                instructivo_state = 'off'
-            },3000)
+            if(data.close!=null&&data.close!=undefined){
+
+            }else{
+                animacion_instructivo = setTimeout(function(){
+                    clearTimeout(animacion_instructivo)
+                    animacion_instructivo = null
+                    instructivo.classList.remove('instructivo_on')
+                    instructivo.classList.add('instructivo_off')
+                    instructivo_state = 'off'
+                },3000)
+            }
         },300)
     }
 }
@@ -686,3 +702,66 @@ function unsetMensaje(delay_){
     },delay)
 }
 
+//////////////////////REINICIAR/////////////////////
+
+
+var animacion_reiniciar = null
+var game_reloading = false
+function reiniciarJuego(){
+    if(!game_reloading){
+        game_reloading = true
+        cargador.className = 'cargador_on'
+        setCargadorText('Reiniciando...')
+
+        animacion_reiniciar = setTimeout(function(){
+            clearTimeout(animacion_reiniciar)
+            animacion_reiniciar = null
+            clearTimeout(animacion_depositar)
+            clearTimeout(animacion_instructivo)
+            clearTimeout(animacion_mensaje)
+            pararReloj()
+
+            pre_residuos = []
+            residuos = []
+
+            residuo_actual = null
+            basura_clicked = null
+            basura_clicked_id = null//esta variable es para el responsive
+
+            caneca_activa = null
+            caneca_activa_ind = 0
+            caneca_abierta_ind = 0
+
+            incorrectos = 0
+            correctos = 0
+            game_finished = false
+
+            animacion_depositar = null
+            animating_depositar = false
+
+            instructivo_state = 'off'
+            animacion_instructivo = null
+
+            mensaje_state = 'off'
+            animacion_mensaje = null
+
+            getI('contenedor_basuras').innerHTML = ''
+            residuo_tag2.className = 'residuo_tag_off'
+            var estrellas_divs = getI('estrellas').getElementsByTagName('div')
+            for(k = 0;k<estrellas_divs.length;k++){
+                estrellas_divs[k].className = 'estrella_off'
+            }
+            residuo_tag.className = 'residuo_tag_off'
+            basura_label.className = 'basura_label_off'
+            unsetInstructivo()
+            unsetMensaje()
+
+            loadResiduos()
+            elementos_cargar = residuos.length
+            porcentaje_carga = Math.round((100/elementos_cargar))
+            loadResiduo(0)
+        },500)
+    }
+        
+    
+}

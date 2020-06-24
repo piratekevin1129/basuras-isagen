@@ -145,6 +145,7 @@ function getTimeText(secs){
 var time_scorm = 0
 var animacion_reloj = null
 function iniciarReloj(){
+	time_scorm = 0
 	animacion_reloj = setInterval(animacionReloj,1000)
 }
 function pararReloj(){

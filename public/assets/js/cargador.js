@@ -99,4 +99,5 @@ function unsetCargador(){
     clearInterval(animacion_cargador)
     //animacion_cargador = null
     cargador.className = 'cargador_off'
+    element_loaded = 1
 }

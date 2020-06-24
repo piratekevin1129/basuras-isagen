@@ -80,9 +80,9 @@
     <div id="basura_label" class="basura_label_off"></div>
 
     <div id="botones">
-        <div class="boton-auxiliar" id="instruccion_btn"></div>
-        <div class="boton-auxiliar" id="reiniciar_btn"></div>
-        <div class="boton-auxiliar" id="sonido_btn"></div>
+        <div class="boton-auxiliar" id="instruccion_btn" onclick="clickInstrucciones(this)"></div>
+        <div class="boton-auxiliar" id="reiniciar_btn" onclick="reiniciarJuego()"></div>
+        <div class="boton-auxiliar sonido_on_btn" id="sonido_btn" onclick="toggleAudio(this)"></div>
     </div>
     <div id="instructivo" class="instructivo_off">
         <p id="instructivo_txt"></p>
@@ -130,6 +130,7 @@
     var finish_mp3 = null
     var over_mp3 = null
     var tapa_mp3 = null
+    var underground_mp3 = getI('underground_mp3')
     
     window.onload = function(){
         //initScorm()
@@ -191,6 +192,23 @@
         }})
         }})
         }})*/
+    }
+
+    function toggleAudio(btn){
+        if(btn.className.indexOf('sonido_on_btn')==-1){
+            btn.classList.remove('sonido_off_btn')
+            btn.classList.add('sonido_on_btn')
+            underground_mp3.volume = 1
+        }else{
+            btn.classList.remove('sonido_on_btn')
+            btn.classList.add('sonido_off_btn')
+            underground_mp3.volume = 0
+        }
+    }
+
+    function clickInstrucciones(){
+        setInstructivo({msg:'Usa el scroll para ver todos los residuos. Cuando pases el cursor por encima verás su nombre y deberás <span>arrastrálos hasta la caneca correcta según su tipo.</span>'})
+        
     }
 
 </script>
