@@ -25,19 +25,19 @@
         <div id="caneca_blanca_info" class="caneca_info">
             <div>
                 <p><span>aprovechable</span></p>
-                <p>Deposita todos los residuos que no sean peligrosos y que no puedan aprovecharse</p>
+                <p>Deposita los materiales reciclables limpios y secos, correspondientes a cartón, vidrio, papel, plástico, metales</p>
             </div>
         </div>
         <div id="caneca_negra_info" class="caneca_info">
             <div>
                 <p><span>no aprovechable</span></p>
-                <p>Deposita los materiales reciclables limpios y secos, correspondientes a cartón, vidrio, papel, plástico, metales</p>
+                <p>Deposita todos los residuos que no sean peligrosos y que no puedan aprovecharse</p>
             </div>
         </div>
         <div id="caneca_verde_info" class="caneca_info">
             <div>
                 <p><span>orgánico</span></p>
-                <p>Deposita los desechos orgánicos que tienen la propiedad de poder desintegrarse o degradarse rápidamente</p>
+                <p>Deposita los desechos que tienen la propiedad de poder desintegrarse o degradarse rápidamente</p>
             </div>
         </div>
         <div id="caneca_roja_info" class="caneca_info">
@@ -50,7 +50,7 @@
 
     <div id="residuo_tag2" class="residuo_tag_off"></div>
 
-    <div class="contenedor_canecas">
+    <div id="contenedor_canecas_can" class="contenedor_canecas">
         <div id="caneca_blanca" onclick="clickCaneca(this,1)" onmouseover="overCaneca(this,1)" onmouseout="outCaneca(this,1)"></div>
         <div id="caneca_negra" onclick="clickCaneca(this,2)" onmouseover="overCaneca(this,2)" onmouseout="outCaneca(this,2)"></div>
         <div id="caneca_verde" onclick="clickCaneca(this,3)" onmouseover="overCaneca(this,3)" onmouseout="outCaneca(this,3)"></div>
@@ -79,11 +79,13 @@
     
     <div id="basura_label" class="basura_label_off"></div>
 
+    <div id="botones">
+        <div class="boton-auxiliar" id="instruccion_btn"></div>
+        <div class="boton-auxiliar" id="reiniciar_btn"></div>
+        <div class="boton-auxiliar" id="sonido_btn"></div>
+    </div>
     <div id="instructivo" class="instructivo_off">
         <p id="instructivo_txt"></p>
-    </div>
-    <div id="mensaje" class="mensaje_off">
-        <p id="mensaje_txt"></p>
     </div>
 
     <div id="cargador" class="cargador_on">
@@ -94,6 +96,9 @@
             <div></div>
         </div>
         <div id="cargador_txt"></div>
+    </div>
+    <div id="mensaje" class="mensaje_on mensaje_on_mobile">
+        <p id="mensaje_txt">Deposita en las canecas <span>los residuos que correspondan según su tipo</span></p>
     </div>
     <audio id="underground_mp3" onended="repeatUnderground()">
         <source src="public/assets/media/electronic_lizard_uplifting_light.mp3" type="audio/mp3">

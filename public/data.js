@@ -86,7 +86,7 @@ var residuos_data = [
             {
                 id:3,
                 nombre:'Cristal plano de ventanas o cuadros, espejos',
-                descripcion:'No hay descripción para Cristal ',
+                descripcion:'',
                 img:'cristal_espejos'
             },
             {

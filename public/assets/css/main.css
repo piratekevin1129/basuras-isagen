@@ -39,14 +39,27 @@
     height: 559px;
     margin: 0px;
     padding: 0px;
-    top: 90px;
+    top: 75px;
     left: 20px;
 }
+#contenedor_canecas_img::before{
+    position: absolute;
+    content: "";
+    width: 47px;
+    height: 69px;
+    top: 10px;
+    left: 8px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 0px;
+    background-image: url(../images/hojita.svg);
+}
+
 #contenedor_canecas_img{
     background-position: 0px;
     background-repeat: no-repeat;
     background-size: cover;
-    background-image: url(../images/barras.png);
+    background-image: url(../images/barras_2.png);
 }
 .contenedor_canecas_image{
     display: none;
@@ -119,50 +132,51 @@
 }
 
 #caneca_blanca{
-    top: 146px;
+    top: 164px;
     left: 0px;
     background-image: url(../images/caneca_blanca.svg);
 }
-#caneca_negra{
-    top: 146px;
-    left: 132px;
-    background-image: url(../images/caneca_negra.svg);
-}
 #caneca_verde{
-    top: 146px;
-    left: 262px;
+    top: 164px;
+    left: 132px;
     background-image: url(../images/caneca_verde.svg);
 }
+#caneca_negra{
+    top: 164px;
+    left: 262px;
+    background-image: url(../images/caneca_negra.svg);
+    
+}
 #caneca_roja{
-    top: 146px;
+    top: 164px;
     left: 400px;
     background-image: url(../images/caneca_roja.svg);
 }
 
 #caneca_blanca_info{
-    top: 69px;
-    left: 35px;
-    width: 95px;
-}
-#caneca_negra_info{
-    top: 69px;
-    left: 140px;
-    width: 120px;
+    top: 73px;
+    left: 2%;
+    width: 25%;
 }
 #caneca_verde_info{
-    top: 69px;
-    left: 270px;
-    width: 125px;
+    top: 73px;
+    left: 28%;
+    width: 23%;
+}
+#caneca_negra_info{
+    top: 73px;
+    left: 52%;
+    width: 21%;
 }
 #caneca_roja_info{
-    top: 69px;
-    left: 405px;
-    width: 95px;
+    top: 73px;
+    left: 78%;
+    width: 19%;
 }
 
 .caneca_info{
     position: absolute;
-    height: 80px;
+    height: 110px;
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
@@ -182,7 +196,7 @@
     margin: 0px;
     padding: 0px;
     font-family: 'Quicksand_Book';
-    font-size: 10px;
+    font-size: 12px;
     color: #003675;
     text-align: center;
     font-weight: normal;
@@ -346,23 +360,6 @@
     -webkit-transition: transform 0.2s, -webkit-transform 0.2s, -o-transform 0.2s, opacity 0.2s, visibility 0.2s;
 }
 
-#tapa_caneca_blanca{
-    top: 152px;
-    left: 21px;
-}
-#tapa_caneca_negra{
-    top: 150px;
-    left: 151px;
-}
-#tapa_caneca_verde{
-    top: 150px;
-    left: 280px;
-}
-#tapa_caneca_roja{
-    top: 149px;
-    left: 420px;
-}
-
 #iluminacion_caneca{
     opacity: 0;
     transition: opacity 0.5s;
@@ -370,19 +367,19 @@
 }
 
 .iluminacion_caneca_1{
-    top: 57px;
+    top: 72px;
     left: 11px;
 }
 .iluminacion_caneca_2{
-    top: 56px;
-    left: 140px;
-}
-.iluminacion_caneca_3{
-    top: 56px;
+    top: 72px;
     left: 270px;
 }
+.iluminacion_caneca_3{
+    top: 72px;
+    left: 140px;
+}
 .iluminacion_caneca_4{
-    top: 54px;
+    top: 72px;
     left: 410px;
 }
 
@@ -399,6 +396,9 @@
 
     transition: left 0.3s;
     -webkit-transition: left 0.3s;
+}
+.mensaje_azul{
+    background-color: #002D6B !important;
 }
 .instructivo_off{
     left: -410px;
@@ -420,6 +420,13 @@
     font-weight: normal;
     line-height: normal;
 }
+#instructivo_txt span{
+    font-family: 'Quicksand_Bold';
+}
+.mensaje_azul #instructivo_txt{
+    color: #FFFFFF !important;
+}
+
 #estrellas{
     position: absolute;
     box-sizing: border-box;
@@ -474,8 +481,8 @@
     -webkit-filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.5));
     -o-filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.5));
     
-    transition: right 0.3s;
-    -webkit-transition: right 0.3s;
+    transition: right 0.3s, top 0.3s;
+    -webkit-transition: right 0.3s, top 0.3s;
 }
 #mensaje::before{
     position: absolute;
@@ -489,6 +496,7 @@
     background-position: 0px;
     background-image: url(../images/hojita.svg);
 }
+
 .mensaje_off{
     right: -280px;
 }

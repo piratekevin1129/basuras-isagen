@@ -107,12 +107,9 @@ function loadResiduo(r){
         setCargadorText('Haz click para comenzar')
         cargador.onclick = function(){
             getI('underground_mp3').play()
-            if(ismobile){
-                setMensaje({msg:'Toca un residuo y luego toca la <span>caneca</span> correspondiente'})
-            }else{
-                setMensaje({msg:'Deposita en las canecas los residuos que correspondan <span>según su tipo</span>'})
-            }
             
+            mensaje.classList.remove('mensaje_on_mobile')
+            unsetMensaje(3000)
             unsetCargador()
 
             iniciarReloj()
@@ -290,7 +287,7 @@ function clickBasura(event,idname,cat,id){
         residuo_tag.style.left = (posx-(residuo_tag_width/2))+'px'
         residuo_tag.style.top = (posy-(residuo_tag_height/2))+'px'
         
-        setInstructivo({msg:'<span>'+residuo_actual.nombre+':</span><br />'+residuo_actual.descripcion})
+        //setInstructivo({msg:'<span>'+residuo_actual.nombre+':</span><br />'+residuo_actual.descripcion})
     }
 }
 
@@ -304,9 +301,9 @@ function outCaneca(caneca,code){
 function clickCaneca(caneca,code){
     if(ismobile){
         if(basura_clicked_id==null){
-            setMensaje({msg:'Debes seleccionar un residuo antes de seleccionar una categoría'})
+            setInstructivo({msg:'Debes seleccionar un residuo antes de seleccionar una categoría',clase:'mensaje_azul'})
         }else{
-            unsetInstructivo()
+            //unsetInstructivo()
             var marco = basura_clicked.getElementsByClassName('basura_cont_marco')[0]
             marco.style.opacity = 0
 
@@ -333,7 +330,7 @@ function clickCaneca(caneca,code){
                     game_finished = true
                     setMensaje({msg:'<span>Las oportunidades terminaron y el juego tambien</span> !!Vuelve a intentarlo',close:false})
                 }else{
-                    setMensaje({msg:'Este residuo no pertenece a esta categoría'})
+                    setInstructivo({msg:'<span>¡Lo siento!</span> Este residuo no pertenece a esta categoría. Vuelve a intentarlo',clase:'mensaje_azul'})
                 }
             }
 
@@ -369,7 +366,7 @@ function downBasura(event,id,cat){
         document.body.addEventListener('mousemove',moveBasura,false)
         document.body.addEventListener('mouseup',upBasura,false)
 
-        setInstructivo({msg:residuo_actual.descripcion})
+        //setInstructivo({msg:residuo_actual.descripcion})
     }
 }
 
@@ -454,7 +451,7 @@ function upBasura(event){
         //spdPlayAnimation({frame:7,stop:11,loop:false},caneca_abierta_ind)
         caneca_abierta_ind = 0
     }
-    unsetInstructivo()
+    //unsetInstructivo()
     
     if(caneca_activa!=null){
         var cat = residuo_actual.categoria
@@ -481,7 +478,7 @@ function upBasura(event){
                 game_finished = true
                 setMensaje({msg:'<span>Las oportunidades terminaron y el juego tambien</span> !!Vuelve a intentarlo',close:false})
             }else{
-                setMensaje({msg:'Este residuo no pertenece a esta categoría'})
+                setInstructivo({msg:'<span>¡Lo siento!</span> Este residuo no pertenece a esta categoría. Vuelve a intentarlo',clase:'mensaje_azul'})
             }
         }
     }else{
@@ -554,7 +551,7 @@ function depositarBasura2(caneca){
             basura_clicked_id = null
             basura_clicked = null
             checkFinalizar()
-        },250)
+        },300)
 
     },50)
 }
@@ -567,7 +564,7 @@ function checkFinalizar(){
         pararReloj()
         guardarScorm(true)
     }else{
-        setMensaje({msg:'¡Muy bien! Continúa asi'})
+        setInstructivo({msg:'<span>¡Muy bien!</span> Continúa asi. '+residuo_actual.descripcion})
     }
 }
 
@@ -585,14 +582,35 @@ function setInstructivo(data){
         instructivo_txt.innerHTML = data.msg
         instructivo.className = 'instructivo_on'
         instructivo_state = 'on'
+        if(data.clase!=null&&data.clase!=undefined){
+            instructivo.classList.add(data.clase)
+        }
+        animacion_instructivo = setTimeout(function(){
+            clearTimeout(animacion_instructivo)
+            animacion_instructivo = null
+            instructivo.classList.remove('instructivo_on')
+            instructivo.classList.add('instructivo_off')
+            instructivo_state = 'off'
+        },3000)
     }else{
-        instructivo.className = 'instructivo_off'
+        instructivo.classList.remove('instructivo_on')
+        instructivo.classList.add('instructivo_off')
         animacion_instructivo = setTimeout(function(){
             clearTimeout(animacion_instructivo)
             animacion_instructivo = null
             instructivo_txt.innerHTML = data.msg
             instructivo.className = 'instructivo_on'
             instructivo_state = 'on'
+            if(data.clase!=null&&data.clase!=undefined){
+                instructivo.classList.add(data.clase)
+            }
+            animacion_instructivo = setTimeout(function(){
+                clearTimeout(animacion_instructivo)
+                animacion_instructivo = null
+                instructivo.classList.remove('instructivo_on')
+                instructivo.classList.add('instructivo_off')
+                instructivo_state = 'off'
+            },3000)
         },300)
     }
 }
@@ -654,11 +672,17 @@ function setMensaje(data){
     }
 }
 
-function unsetMensaje(){
-    clearTimeout(animacion_mensaje)
-    animacion_mensaje = null
+function unsetMensaje(delay_){
+    var delay = 0
+    if(delay_!=null&&delay_!=undefined){
+        delay = delay_
+    }
+    animacion_mensaje = setTimeout(function(){
+        clearTimeout(animacion_mensaje)
+        animacion_mensaje = null
 
-    mensaje.className = 'mensaje_off'
-    mensaje_state = 'off'
+        mensaje.className = 'mensaje_off'
+        mensaje_state = 'off'
+    },delay)
 }
 
