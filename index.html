@@ -121,7 +121,7 @@
     loadResiduos()
 
     var elementos_cargar = residuos.length+8
-    var porcentaje_carga = Math.round((100/elementos_cargar))
+    var porcentaje_carga = Math.floor((100/elementos_cargar))
 
     var click_mp3 = null
     var correcto_mp3 = null
@@ -194,7 +194,7 @@
         }})*/
     }
 
-    var toggle_audio = 'off'
+    var toggle_audio = 'on'
     function toggleAudio(btn){
         if(toggle_audio=='off'){
             btn.classList.remove('sonido_off_btn')

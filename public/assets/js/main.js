@@ -765,7 +765,7 @@ function reiniciarJuego(){
 
             loadResiduos()
             elementos_cargar = residuos.length
-            porcentaje_carga = Math.round((100/elementos_cargar))
+            porcentaje_carga = Math.floor((100/elementos_cargar))
             loadResiduo(0)
         },500)
     }
