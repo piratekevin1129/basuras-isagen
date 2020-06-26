@@ -57,13 +57,37 @@ var residuos_data = [
                 nombre:'Botella de vidrio',
                 descripcion:'Para que sea aprovechable recuerda sacarle todo el líquido interno',
                 img:'botella_vidrio'
-            }/*,
+            },
             {
                 id:10,
+                nombre:'Cubetas de huevos',
+                descripcion:'Se pueden reutilizar o aprovecharlos como materia prima para hacer otras canastas',
+                img:'cubetas_huevos'
+            },
+            {
+                id:11,
+                nombre:'Tapas metálicas o plásticas',
+                descripcion:'Este material es aprovechable, se puede reciclar',
+                img:'tapas_metalicas_plasticas'
+            },
+            {
+                id:12,
+                nombre:'Revistas',
+                descripcion:'Las revistas y periódicos son materiales reciclables',
+                img:'revistas'
+            },
+            {
+                id:13,
+                nombre:'Ganchos de cosedora',
+                descripcion:'Para cuidar la salud de otras personas debes depositarlos en un pequeño contenedor con tapa en tu puesto de trabajo, una vez lo llenes se puede entregar como metálico',
+                img:'ganchos_cosedora'
+            },
+            {
+                id:14,
                 nombre:'Envases de yogourt',
                 descripcion:'Para que sea aprovechable recuerda sacarle todo el líquido interno',
                 img:'envases_yogourt'
-            }*/
+            }
         ]
     },
     {
@@ -94,6 +118,42 @@ var residuos_data = [
                 nombre:'Pitillos o mezcladores plásticos',
                 descripcion:'Es un residuo que no se recicla, ni se reusa, debe ir a un relleno sanitario, te recomendamos reducir o eliminar su uso',
                 img:'pitillos_mezcladores_plastico'
+            },
+            {
+                id:5,
+                nombre:'Tapones de corcho',
+                descripcion:'Es un residuo que no se recicla, algunas personas las utilizan como artesanías',
+                img:'tapones_corcho'
+            },
+            {
+                id:6,
+                nombre:'Arena de gato',
+                descripcion:'',
+                img:'arena_gato'
+            },
+            {
+                id:7,
+                nombre:'Papel higiénico',
+                descripcion:'',
+                img:'papel_higienico'
+            },
+            {
+                id:8,
+                nombre:'Envoltura de mecatos',
+                descripcion:'Es un residio que no se recicla, algunas personas las utilizan como artesanías o para llenar el ladrillo ecológico',
+                img:'envoltura_mecatos'
+            },
+            {
+                id:9,
+                nombre:'Papel fotográfico',
+                descripcion:'Es un residuo que no se recicla, algunas personas las utilizan como artesanías o para llenar el ladrillo ecológico',
+                img:'papel_fotografico'
+            },
+            {
+                id:10,
+                nombre:'Cintas de video',
+                descripcion:'Es un residuo que no se recicla, ni se reusa, debe ir a un relleno sanitario, te recomendamos reducir o eliminar su uso',
+                img:'cintas_video'
             }
         ]
     },
@@ -126,6 +186,12 @@ var residuos_data = [
                 descripcion:'Es un residuo orgánico que se aprovecha para fabricar abono orgánico',
                 img:'plantas'
             },
+            {
+                id:5,
+                nombre:'Bolsas de aromáticas y té',
+                descripcion:'Es un residuo orgánico que se aprovecha para fabricar abono orgánico',
+                img:'bolsas_aromaticas_te'
+            }
         ]
     },
     {
@@ -180,6 +246,48 @@ var residuos_data = [
                 nombre:'Envases de antipulgas, garrapatas',
                 descripcion:'Todos los envases que contuvieron sustancias químicas peligrosas, también se consideran peligrosos. Los antipulgas y garrapatas contienen venenos o elementos tóxicos',
                 img:'envases_antipulgas_garrapatas'
+            },
+            {
+                id:9,
+                nombre:'Llantas',
+                descripcion:'Contienen químicos altamente contaminantes del agua, además contienen elementos electrónicos que pueden ser aprovechados. Debes entregarlo en el punto de recolección más cercano a tu hogar',
+                img:'llantas'
+            },
+            {
+                id:10,
+                nombre:'Medicamentos vencidos',
+                descripcion:'Al perder su vigencia se convierte en una sustancia peligrosa. Debes entregarlo en el punto de recolección más cercano a tu hogar',
+                img:'medicamentos_vencidos'
+            },
+            {
+                id:11,
+                nombre:'Jeringas',
+                descripcion:'Al estar contaminado con sangre se convierte en un residuo biológico. Debes entregarlo en el punto de recolección más cercano a tu hogar',
+                img:'jeringas'
+            },
+            {
+                id:12,
+                nombre:'Electrodomésticos',
+                descripcion:'Al perder su vida útil y si no se encuentra repuesto, los componentes electrónicos pueden aprovecharse. Debes entregarlo en el punto de recolección más cercano a tu hogar',
+                img:'electrodomesticos'
+            },
+            {
+                id:13,
+                nombre:'Cartuchos de impresoras',
+                descripcion:'Contienen tintas altamente contaminantes del agua, además contienen elementos electrónicos que pueden ser aprovechados. Debes entregarlo en el punto de recolección más cercano a tu hogar',
+                img:'cartuchos_impresoras'
+            },
+            {
+                id:14,
+                nombre:'Bombillas / Luminarias',
+                descripcion:'Contienen químicos altamente contaminantes del agua, además contienen elementos electrónicos que pueden ser aprovechados. Debes entregarlo en el punto de recolección más cercano a tu hogar',
+                img:'bombillas_luminarias'
+            },
+            {
+                id:15,
+                nombre:'Aceite de Cocina',
+                descripcion:'Al verterlo al agua contamina los ríos y quebradas. Debes entregarlo en el punto de recolección más cercano a tu hogar',
+                img:'aceite_cocina'
             }
         ]
     }

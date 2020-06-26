@@ -94,7 +94,7 @@
     #caneca_negra_info{
         top: 70px;
         left: 52%;
-        width: 21%;
+        width: 22%;
     }
     #caneca_roja_info{
         top: 70px;
@@ -104,6 +104,7 @@
 
     .caneca_info{
         height: 103px;
+        padding-top: 5px;
     }
     
     .caneca_info > div > p{
@@ -173,18 +174,18 @@
     /**************OTRAS COSAS****************/
     #instructivo{
         position: absolute;
-        width: 350px;
+        width: 500px;
         padding: 10px;
-        top: 0px;
+        top: 40px;
     }
     .instructivo_off{
-        left: -350px;
+        left: -500px;
     }
     .instructivo_on{
         left: 0px;
     }
     #instructivo_txt{
-        font-size: 15px;
+        font-size: 14px;
         line-height: normal;
     }
     #estrellas{
@@ -203,7 +204,7 @@
     }
 
     #mensaje{
-        width: 270px;
+        width: 310px;
         margin: 0px;
         height: auto;
         padding: 10px;
@@ -246,6 +247,23 @@
         top: -moz-calc(50% + 4px);
         left: 0px;
     }
+
+    #botones{
+        width: 35px;
+        width: calc(35px * 3);
+        width: -moz-calc(35px * 3);
+        height: 30px;
+        top: 5px;
+        left: 5px;
+    }
+
+    .boton-auxiliar{
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
+        float: left;
+        background-size: 20px;
+    }   
 }
 
 @media (min-width: 530px) and (max-width: 709px){
@@ -321,7 +339,7 @@
     #caneca_negra_info{
         top: 73px;
         left: 52%;
-        width: 21%;
+        width: 22%;
     }
     #caneca_roja_info{
         top: 73px;
@@ -331,6 +349,7 @@
 
     .caneca_info{
         height: 100px;
+        padding-top: 5px;
     }
     
     .caneca_info > div > p{
@@ -407,7 +426,7 @@
         position: absolute;
         width: 480px;
         padding: 10px;
-        top: 160px;
+        top: 200px;
     }
     .instructivo_off{
         left: -480px;
@@ -437,19 +456,20 @@
     }
 
     #mensaje{
-        width: 270px;
+        width: 310px;
         margin: 0px;
         height: auto;
         padding: 10px;
         top: 85%;
     }
-    #mensaje::before{
-        display: none;
-    }
     
     #mensaje_txt{
         font-size: 15px;
         line-height: normal;
+    }
+
+    .mensaje_on_mobile{
+        top:65% !important;
     }
     
     /***********CARGADOR*************/
@@ -489,13 +509,30 @@
         transition: none;
         -webkit-transition: none;
     }
+
+    #botones{
+        width: 35px;
+        width: calc(35px * 3);
+        width: -moz-calc(35px * 3);
+        height: 30px;
+        top: 165px;
+        left: 5px;
+    }
+
+    .boton-auxiliar{
+        width: 30px;
+        height: 30px;
+        margin-right: 5px;
+        float: left;
+        background-size: 20px;
+    }   
 }
 
 @media (min-width: 280px) and (max-width: 529px){
     html,body{
         position: relative;
         width: 100%;
-        height: 700px;
+        height: 650px;
         overflow: hidden;
         margin: 0px;
         padding: 0px;
@@ -504,7 +541,7 @@
 
     #container{
         width: 100%;
-        height: 700px;
+        height: 650px;
     }
 
     #fondo{
@@ -669,13 +706,20 @@
         position: absolute;
         width: 100%;
         padding: 10px;
-        top: 230px;
+        top: 200px;
+        left: 0px;
     }
     .instructivo_off{
-        left: -100%;
+        opacity: 0;
+        visibility: hidden;
+        transition: visibility 0.3s, opacity 0.3s !important;
+        -webkit-transition: visibility 0.3s, opacity 0.3s !important;
     }
     .instructivo_on{
-        left: 0px;
+        opacity: 1;
+        visibility: visible;
+        transition: visibility 0s, opacity 0.3s !important;
+        -webkit-transition: visibility 0s, opacity 0.3s !important;
     }
     #instructivo_txt{
         font-size: 14px;
@@ -703,8 +747,12 @@
         margin: 0px;
         height: auto;
         padding: 10px;
-        top: 190px;
+        top: initial;
+        bottom: 50px;
+        left: 5%;
+        right: initial;
     }
+
     #mensaje::before{
         display: none;
     }
@@ -715,13 +763,20 @@
         text-align: center;
     }
     .mensaje_off{
-        right: -100%;
+        opacity: 0;
+        visibility: hidden;
+        transition: visibility 0.3s, opacity 0.3s !important;
+        -webkit-transition: visibility 0.3s, opacity 0.3s !important;
     }
     .mensaje_on{
-        right: 5%;
+        opacity: 1;
+        visibility: visible;
+        transition: visibility 0s, opacity 0.3s !important;
+        -webkit-transition: visibility 0s, opacity 0.3s !important;
     }
     .mensaje_on_mobile{
         top:20px !important;
+        bottom: initial !important;
     }
     
     /***********CARGADOR*************/
@@ -761,8 +816,21 @@
         transition: none;
         -webkit-transition: none;
     }
-}
 
-@media (min-width: 280px) and (max-width: 359px){
-    
+    #botones{
+        width: 30px;
+        width: calc(30px * 3);
+        width: -moz-calc(30px * 3);
+        height: 25px;
+        top: 5px;
+        left: 5px;
+    }
+
+    .boton-auxiliar{
+        width: 25px;
+        height: 25px;
+        margin-right: 5px;
+        float: left;
+        background-size: 20px;
+    }  
 }

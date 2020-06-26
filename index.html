@@ -194,15 +194,18 @@
         }})*/
     }
 
+    var toggle_audio = 'off'
     function toggleAudio(btn){
-        if(btn.className.indexOf('sonido_on_btn')==-1){
+        if(toggle_audio=='off'){
             btn.classList.remove('sonido_off_btn')
             btn.classList.add('sonido_on_btn')
-            underground_mp3.volume = 1
+            underground_mp3.volume = 0.5
+            toggle_audio = 'on'
         }else{
             btn.classList.remove('sonido_on_btn')
             btn.classList.add('sonido_off_btn')
             underground_mp3.volume = 0
+            toggle_audio = 'off'
         }
     }
 

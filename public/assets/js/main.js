@@ -33,7 +33,7 @@ var game_height = 507
 
 var pre_residuos = []
 var residuos = []
-var num_rand = 4
+var num_rand = 5
 
 function findResiduoData(id,cat){
     var data = null
@@ -57,6 +57,7 @@ function isInArray(obj,array){
 
 function loadResiduos(){
     var categorias_orden = []
+    //categorias_orden = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3]
     for(i = 0;i<residuos_data.length;i++){
         for(j = 0;j<num_rand;j++){
             categorias_orden.push(i)
@@ -96,6 +97,12 @@ function loadResiduos(){
 }
 
 function repeatUnderground(){
+    if(toggle_audio=='on'){
+        underground_mp3.volume = 0.5
+    }else{
+        underground_mp3.volume = 0
+    }
+    
     underground_mp3.play()
 }
 
@@ -105,7 +112,6 @@ function loadResiduo(r){
         fillCargador()
 
         if(game_reloading){
-            underground_mp3.play()
             unsetCargador()
 
             game_reloading = false
@@ -113,6 +119,7 @@ function loadResiduo(r){
         }else{
             setCargadorText('Haz click para comenzar')
             cargador.onclick = function(){
+                underground_mp3.volume = 0.5
                 underground_mp3.play()
                 
                 mensaje.classList.remove('mensaje_on_mobile')
@@ -601,7 +608,7 @@ function setInstructivo(data){
                 instructivo.classList.remove('instructivo_on')
                 instructivo.classList.add('instructivo_off')
                 instructivo_state = 'off'
-            },3000)
+            },8000)
         }
         
     }else{
@@ -625,7 +632,7 @@ function setInstructivo(data){
                     instructivo.classList.remove('instructivo_on')
                     instructivo.classList.add('instructivo_off')
                     instructivo_state = 'off'
-                },3000)
+                },8000)
             }
         },300)
     }
