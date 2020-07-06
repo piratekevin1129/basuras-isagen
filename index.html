@@ -16,7 +16,6 @@
 <body onbeforeunload="doUnload(false);" onunload="doUnload();">
 <div id="container">
     <div id="fondo"></div>
-
     
     <div id="contenedor_canecas_img" class="contenedor_canecas">
         <div class="contenedor_canecas_image">
@@ -79,6 +78,7 @@
     
     <div id="basura_label" class="basura_label_off"></div>
 
+    <div id="instructivo_alfa" class="instructivo-alfa-off"></div>
     <div id="botones">
         <div class="boton-auxiliar" id="instruccion_btn" onclick="clickInstrucciones(this)"></div>
         <div class="boton-auxiliar" id="reiniciar_btn" onclick="reiniciarJuego()"></div>
@@ -133,8 +133,8 @@
     var underground_mp3 = getI('underground_mp3')
     
     window.onload = function(){
-        //initScorm()
-        startGame()
+        initScorm()
+        //startGame()
     }
 
     function startGame(){

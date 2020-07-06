@@ -342,6 +342,7 @@ function clickCaneca(caneca,code){
                 incorrectos++
                 if(incorrectos==5){
                     game_finished = true
+                    getI('instructivo_alfa').className = 'instructivo-alfa-on'
                     setInstructivo({msg:'<span>¡Lo siento!</span> Las oportunidades terminaron y el juego también <span>!Vuelve a intentarlo!</span>',clase:'mensaje_azul',close:false})
                 }else{
                     setInstructivo({msg:'<span>¡Lo siento!</span> Este residuo no pertenece a esta categoría. Vuelve a intentarlo',clase:'mensaje_azul'})
@@ -490,6 +491,7 @@ function upBasura(event){
             incorrectos++
             if(incorrectos==5){
                 game_finished = true
+                getI('instructivo_alfa').className = 'instructivo-alfa-on'
                 setInstructivo({msg:'<span>¡Lo siento!</span> Las oportunidades terminaron y el juego también <span>!Vuelve a intentarlo!</span>',clase:'mensaje_azul',close:false})
             }else{
                 setInstructivo({msg:'<span>¡Lo siento!</span> Este residuo no pertenece a esta categoría. Vuelve a intentarlo',clase:'mensaje_azul'})
@@ -574,6 +576,7 @@ function checkFinalizar(){
     if(correctos==residuos.length){
         finish_mp3.play()
         game_finished = true
+        getI('instructivo_alfa').className = 'instructivo-alfa-on'
         setInstructivo({msg:'<span>¡Excelente!</span> vemos que todos los conceptos han quedado claros. Felicitaciones',close:false})
         pararReloj()
         guardarScorm(true)
@@ -751,6 +754,8 @@ function reiniciarJuego(){
 
             mensaje_state = 'off'
             animacion_mensaje = null
+
+            getI('instructivo_alfa').className = 'instructivo-alfa-off'
 
             getI('contenedor_basuras').innerHTML = ''
             residuo_tag2.className = 'residuo_tag_off'
